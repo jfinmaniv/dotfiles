@@ -115,4 +115,3 @@ let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
   let g:vimwiki_list = [{'path': '~/notes/', 'syntax': 'markdown', 'ext': '.txt'}]
 
 " vim: foldmethod=manual
-
