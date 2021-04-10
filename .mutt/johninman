@@ -1,0 +1,10 @@
+set folder=~/mail/johninman/
+set from=john@johninman.dev
+set postponed=+Drafts
+set record=+"Sent"
+set sendmail="/usr/bin/msmtp --account=johninman"
+set spoolfile=+INBOX
+
+macro index i "<shell-escape>mbsync johninman<enter>" "sync johninman account"
+macro index d "<save-message>+Archive<enter>" "Archive"
+

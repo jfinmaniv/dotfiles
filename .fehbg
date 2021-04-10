@@ -1,0 +1,2 @@
+#!/bin/sh
+feh --no-fehbg --bg-fill '/media/storage/pictures/wallpaper/sunset-above-clouds.jpg'

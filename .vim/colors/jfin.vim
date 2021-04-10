@@ -1,0 +1,43 @@
+" black    darkred darkgreen brown  darkblue darkmagenta darkcyan lightgray
+" darkgray red     green     yellow blue     magenta     cyan     white
+" none
+highlight Comment          ctermfg=gray      ctermbg=none      cterm=none
+highlight Constant         ctermfg=darkgreen ctermbg=none      cterm=none
+highlight DiffAdd          ctermfg=darkred     ctermbg=none      cterm=none
+highlight DiffChange       ctermfg=black     ctermbg=none      cterm=none
+highlight DiffDelete       ctermfg=darkred   ctermbg=none      cterm=none
+highlight DiffText         ctermfg=darkred     ctermbg=none      cterm=none
+highlight EndOfBuffer      ctermfg=gray      ctermbg=none      cterm=none
+highlight Error            ctermfg=darkred   ctermbg=none      cterm=none
+highlight ErrorMsg         ctermfg=darkred   ctermbg=none      cterm=none
+highlight Folded           ctermfg=gray      ctermbg=lightgray cterm=none
+highlight Identifier       ctermfg=black     ctermbg=none      cterm=none
+highlight Ignore           ctermfg=gray      ctermbg=none      cterm=none
+highlight IncSearch        ctermfg=black     ctermbg=yellow    cterm=none
+highlight LineNr           ctermfg=gray      ctermbg=lightgray cterm=none
+highlight MatchParen       ctermfg=black     ctermbg=yellow    cterm=none
+highlight ModeMsg          ctermfg=gray      ctermbg=none      cterm=none
+highlight NonText          ctermfg=gray      ctermbg=none      cterm=none
+highlight Pmenu            ctermfg=black     ctermbg=lightgray cterm=none
+highlight PmenuSbar        ctermfg=none      ctermbg=lightgray cterm=none
+highlight PmenuSel         ctermfg=black     ctermbg=yellow    cterm=none
+highlight PmenuThumb       ctermfg=black     ctermbg=lightgray cterm=none
+highlight PreProc          ctermfg=black     ctermbg=none      cterm=none
+highlight Search           ctermfg=black     ctermbg=yellow    cterm=none
+highlight Special          ctermfg=green     ctermbg=none      cterm=none
+highlight SpecialKey       ctermfg=gray      ctermbg=none      cterm=none
+highlight SpellBad         ctermfg=darkred   ctermbg=none      cterm=none
+highlight SpellCap         ctermfg=darkred   ctermbg=none      cterm=none
+highlight Statement        ctermfg=black     ctermbg=none      cterm=none
+highlight StatusLine       ctermfg=gray      ctermbg=lightgray cterm=none
+highlight StatusLineNC     ctermfg=gray      ctermbg=lightgray     cterm=none
+highlight StatusLineTerm   ctermfg=gray      ctermbg=lightgray cterm=none
+highlight StatusLineTermNC ctermfg=lightgray ctermbg=white     cterm=none
+highlight Title            ctermfg=black     ctermbg=none      cterm=bold
+highlight Type             ctermfg=black     ctermbg=none      cterm=none
+highlight Underlined       ctermfg=black     ctermbg=none      cterm=underline
+highlight VertSplit        ctermfg=lightgray ctermbg=white     cterm=none
+highlight Visual           ctermfg=black     ctermbg=yellow    cterm=none
+highlight VisualNOS        ctermfg=black     ctermbg=yellow    cterm=none
+highlight WarningMsg       ctermfg=darkred   ctermbg=none      cterm=none
+highlight WildMenu         ctermfg=black     ctermbg=yellow    cterm=none
