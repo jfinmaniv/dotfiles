@@ -1,0 +1,51 @@
+! light bg
+! black 
+*color0:  #000000
+*color8:  #000000
+! red 
+*color1:  #cc0000
+*color9:  #cc0000
+! green 
+*color2:  #006600
+*color10: #006600
+! brown/yellow 
+*color3:  #cc6600
+*color11: #ffff00
+! blue 
+*color4:  #000099
+*color12: #000099
+! magenta 
+*color5:  #cc0099
+*color13: #cc0099
+! cyan 
+*color6:  #006699
+*color14: #006699
+! gray/white
+*color7:  #999999
+*color15: #eeeeee
+
+*foreground: #000000
+*background: #ffffff
+
+! *cursorUnderLine: true
+*cursorBlink: true
+*cursorOffTime: 500
+*cursorOnTime: 500
+
+! *colorInnerBorder: true
+*termName: xterm-256color
+
+*faceName: xft:DejaVu Sans Mono:size=12
+
+*scrollBar: false
+
+! The following two settings may be specific to xterm.
+! As it sounds. allows for emacs bindings in terminal.  
+*metaSendsEscape: true
+! Allows for expected Delete behavior of deleting character in front of
+! cursor.
+*deleteIsDEL: false
+! cancels xterms m-enter fullscreen keybinding
+*omitTranslation: fullscreen
+! for copy/paste
+*selectToClipboard: true

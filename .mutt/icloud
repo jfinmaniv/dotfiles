@@ -1,0 +1,8 @@
+set folder=~/.mail/icloud/
+set from=jfinmaniv@icloud.com
+set postponed=+Drafts
+set record=+"Sent Messages"
+set sendmail="/usr/bin/msmtp --account=icloud"
+set spoolfile=+INBOX
+
+macro index i "<shell-escape>mbsync icloud<enter>" "sync icloud account"

@@ -1,0 +1,69 @@
+# global options--------------------------------------------------------{{{
+Create Slave # create folders everywhere
+SyncState * # put syncstate files in respective folders
+# }}}
+# icloud ---------------------------------------------------------------{{{
+
+# Remote
+IMAPStore icloud-remote
+Host imap.mail.me.com
+User jfinmaniv
+PassCmd "cat ~/.pass/icloud"
+SSLType IMAPS
+CertificateFile /etc/ssl/cert.pem
+
+# Local
+MaildirStore icloud-local
+Subfolders Verbatim
+Path ~/.mail/icloud/
+Inbox ~/.mail/icloud/INBOX
+
+Channel icloud
+Master :icloud-remote:
+Slave :icloud-local:
+Patterns INBOX Drafts "Sent Messages"
+# }}}
+# gmail ----------------------------------------------------------------{{{
+
+# Remote
+IMAPStore gmail-remote
+Host imap.gmail.com
+User jfinmaniv@gmail.com
+PassCmd "cat ~/.pass/gmail"
+SSLType IMAPS
+CertificateFile /etc/ssl/cert.pem
+
+# Local
+MaildirStore gmail-local
+Subfolders Verbatim
+Path ~/.mail/gmail/
+Inbox ~/.mail/gmail/INBOX
+
+# create channel
+Channel gmail
+Master :gmail-remote:
+Slave :gmail-local:
+Patterns INBOX "[Gmail]/Drafts" "[Gmail]/Sent Mail"
+# }}}
+# csumb ----------------------------------------------------------------{{{
+
+# Remote
+IMAPStore csumb-remote
+Host imap.gmail.com
+User jinman@csumb.edu
+PassCmd "cat ~/.pass/csumb"
+SSLType IMAPS
+CertificateFile /etc/ssl/cert.pem
+
+# Local
+MaildirStore csumb-local
+Subfolders Verbatim
+Path ~/.mail/csumb/
+Inbox ~/.mail/csumb/INBOX
+
+# create channel
+Channel csumb-inbox
+Master :csumb-remote:
+Slave :csumb-local:
+Patterns INBOX "[Gmail]/Drafts" "[Gmail]/Sent Mail"
+# }}}
