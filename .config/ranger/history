@@ -1,0 +1,18 @@
+shell mkdir nhd2
+shell -f ls
+shell mkdir pack
+mkdir plugins
+shell mkdir start
+rename test
+rename nhd
+rename sites.csv
+
+open_with vim
+rename attachment-2.pdf.
+rename attachment-2.pdf
+rename attachment-1.pdf
+shell unzip Re__Rec_Canal_Diazinon_Report_Card_Bullet_Points.zip
+rename water-quality.png
+rename report-card-slo.docx
+rename report-card-bell.docx
+rename report-card-salinas.docx

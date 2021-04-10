@@ -1,0 +1,8 @@
+tpope/vim-surround
+tpope/vim-commentary
+godlygeek/tabular
+tpope/vim-repeat
+ervandew/supertab
+sirver/ultisnips
+chrisbra/csv.vim
+jpalardy/vim-slime
