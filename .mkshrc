@@ -1,7 +1,7 @@
 # options
 set -o emacs
 bind ^L=clear-screen
-bind -m ^[[tt="$(date +'%Y-%m-%d')"
+bind -m ^[d="$(date +'%Y-%m-%d')"
 
 # history
 HISTFILE=~/.histfile
