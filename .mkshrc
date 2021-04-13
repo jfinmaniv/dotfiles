@@ -1,0 +1,31 @@
+# options
+set -o emacs
+bind ^L=clear-screen
+bind -m ^t="$(date +'%Y-%m-%d')"
+
+# history
+HISTFILE=~/.histfile
+HISTSIZE=10000
+SAVEHIST=10000
+
+# PS1
+PS1=$'\n\1\e[31m\$(x=\$?;((\$x))&&print "\$x ")'\
+$'\1\e[00m\1\e[37m\${PWD/~/\\~}>\1\e[00m '
+
+# aliases
+alias cdd="cd $(cygpath $USERPROFILE)"
+alias dot='git --git-dir=$HOME/.dot.git/ --work-tree=$HOME'
+alias ll='ls -lhF --color'
+alias la='ls -AlhF --color'
+alias owrt='ssh root@192.168.1.1'
+alias ranger='source /usr/bin/ranger'
+alias rs='rsync -rltuvPh'
+alias krc='vim ~/.mkshrc; . ~/.mkshrc'
+alias trc='vim ~/.tmux.conf; tmux source-file ~/.tmux.conf'
+alias tp='trash'
+
+# start tmux
+if [ -z "$TMUX" ]
+then
+    tmux
+fi
