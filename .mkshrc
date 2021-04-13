@@ -1,7 +1,7 @@
 # options
 set -o emacs
-bind ^L=clear-screen
-bind -m ^t="$(date +'%Y-%m-%d')"
+bind ^l=clear-screen
+bind -m ^t=$(date +'%Y-%m-%d')
 
 # history
 HISTFILE=~/.histfile
