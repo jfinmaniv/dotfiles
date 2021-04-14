@@ -6,7 +6,11 @@ bind -m ^xd="$(date +'%Y-%m-%d')"
 # history
 HISTFILE=~/.histfile
 HISTSIZE=10000
-SAVEHIST=10000
+AVEHIST=10000
+
+# windows user directory
+UP="$(cygpath $USERPROFILE)"
+
 
 # PS1
 PS1=$'\n\1\e[31m\$(exit=\$?; (( \$exit )) && print "\$exit ")'\
