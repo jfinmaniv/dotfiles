@@ -18,21 +18,21 @@ set foldmethod=marker " folding type
 set nohlsearch
 set ignorecase " ignore case
 set incsearch
-set laststatus=2
+set laststatus=0
 set linebreak " wrap long lines at a blank
 set modeline
 set modelines=1
 set nowrapscan
-set number " print the line number in front of each line
+" set number " print the line number in front of each line
 set pastetoggle=<insert> " key code that causes paste to toggle
 set ruler " show cursor line and column in the status line
 set shiftround " round indent to shiftwidth
-set shiftwidth=4 " number of spaces to use for (auto)indent step
+" set shiftwidth=4 " number of spaces to use for (auto)indent step
 set showbreak=+\  " hanging indents for wrapped lines
 set showcmd " show commands
 set smartcase " no ignore case when pattern has uppercase
 set t_Co=16 " get rid of bold light colors
-set tabstop=4 " number of spaces that <tab> in file uses
+" set tabstop=4 " number of spaces that <tab> in file uses
 set textwidth=78 " maximum width of text that is being inserted
 set undodir=~/.vim/undo " undo files here
 set undofile " persistent undo
