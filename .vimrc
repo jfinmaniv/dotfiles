@@ -1,9 +1,11 @@
-" filetype, syntax{{{
+" filetype, syntax
 filetype plugin indent on " enables filetype detection
 syntax enable " enables syntax highlighting, keeping :highlight commands
-"}}}
-" options{{{
+
+" variables
 let mapleader=" "
+
+" options
 let g:markdown_folding = 1
 set autoindent " take indent for new line from previous line
 set autoread " automatically read file when changed outside of vim
@@ -38,25 +40,46 @@ set undodir=~/.vim/undo " undo files here
 set undofile " persistent undo
 set virtualedit=block
 set wildmenu
-"}}}
-" maps{{{
-cabbrev cdd :lcd %:p:h
 
+" functions
+
+function HandleFile()
+        " file handler
+        let link = @l
+        let ext = fnamemodify(link, ':e')
+        if ext == 'txt'
+                execute 'e' . fnameescape(link)
+        elseif ext == 'pdf'
+                execute system('sumatra-pdf ' . fnameescape(link) . '&')
+        else 
+                execute system('start "" ' . fnameescape(link) . '&')
+        endif
+endfunction
+
+" maps
+
+nnoremap <cr> "lyi):call HandleFile()<cr>
 inoremap jk <esc>l
 nnoremap <f10>
-    \ :echo synIDattr(synIDtrans(synID(line("."),col("."),1)),"name")<CR>
+        \ :echo synIDattr(synIDtrans(synID(line("."),col("."),1)),"name")<CR>
 nnoremap <leader>si :e ~/.vim/my-snippets/
 nnoremap <leader>so <c-^>:bdelete snippets<cr>
-    \ :call UltiSnips#RefreshSnippets()<cr>
+        \ :call UltiSnips#RefreshSnippets()<cr>
 nnoremap <leader>vi :e $MYVIMRC<cr>
 nnoremap <leader>vo :w<cr><c-^>:bdelete .vimrc<cr>:source $MYVIMRC<cr>
-noremap <silent> Y "cy :redir! > /dev/clipboard \| silent echon @c \| redir END<cr>
-nnoremap <silent> <leader>gf vi)"fy:!start-pdf "<c-r>f"<cr>
-nnoremap <silent> <leader>gd vi)"dy:!start-pdf "$(dirname '<c-r>d')"<cr>
+noremap <silent> Y 
+        \ "cy :redir! > /dev/clipboard \| silent echon @c \| redir END<cr>
+nnoremap <silent> <leader>gd yi)"d:!start "" "$(dirname '<c-r>d')"<cr>
 " uses expression register:
-nnoremap <silent> <leader>tp vi)c<c-r>=system('transpath "<c-r>t"')<cr><esc>
-" }}}
-" filetypes{{{
+nnoremap <silent> <leader>cp 
+        \ "pyi)vi)c<c-r>=system('echo -n $(cygpath "<c-r>p")')<cr><esc>
+" 
+
+" command abbreviations
+cnoreabbrev cdd lcd %:p:h
+cnoreabbrev h tab h
+
+" filetypes
 " r
 augroup r " {
     autocmd!
@@ -73,8 +96,17 @@ augroup sh " {
     autocmd FileType sh nnoremap <buffer><leader>ri :!sh-pane<cr>
     autocmd FileType sh nnoremap <buffer><leader>ro :!tmux kill-pane -t {bottom-right}<cr>
 augroup END " }
-"}}}
-" slime{{{
+
+" markdown
+augroup markdown " {
+    autocmd!
+    autocmd FileType markdown set foldlevel=2 
+    autocmd FileType markdown set textwidth=0 
+    autocmd FileType markdown set tabstop=2 
+    autocmd FileType markdown set shiftwidth=2
+    autocmd FileType markdown set nowrap
+augroup END " }
+" slime
 let g:slime_target = "tmux"
 let g:slime_default_config = {"socket_name": "default", "target_pane": "{bottom-right}"}
 let g:slime_dont_ask_default = 1
@@ -84,8 +116,8 @@ augroup slime " {
     autocmd FileType python,r,sh xmap <buffer> , <Plug>SlimeRegionSend
     autocmd FileType python,r,sh nmap <buffer> <leader>, <Plug>SlimeParagraphSend}j
 augroup END " }
-"}}}
-" colors{{{
+
+" colors
 function! SynStack()
   if !exists("*synstack")
     return
@@ -126,7 +158,7 @@ highlight MatchParen       ctermfg=black    ctermbg=yellow cterm=none
 " highlight MoreMsg            
 highlight NonText          ctermfg=gray     ctermbg=none   cterm=none
 " highlight Normal             
-highlight Pmenu            ctermfg=black    ctermbg=white  cterm=none
+highlight Pmenu            ctermfg=gray    ctermbg=white  cterm=none
 highlight PmenuSbar        ctermfg=none     ctermbg=white  cterm=none
 highlight PmenuSel         ctermfg=black    ctermbg=yellow cterm=none
 highlight PmenuThumb       ctermfg=black    ctermbg=white  cterm=none
@@ -146,9 +178,9 @@ highlight StatusLine       ctermfg=gray     ctermbg=white  cterm=none
 highlight StatusLineNC     ctermfg=white    ctermbg=white  cterm=none
 highlight StatusLineTerm   ctermfg=gray     ctermbg=white  cterm=none
 highlight StatusLineTermNC ctermfg=white    ctermbg=white  cterm=none
-" highlight TabLine            
-" highlight TabLineFill        
-" highlight TabLineSel         
+highlight TabLine          ctermfg=gray    ctermbg=white  cterm=none          
+highlight TabLineFill      ctermfg=black    ctermbg=white  cterm=none          
+highlight TabLineSel       ctermfg=black    ctermbg=none  cterm=none          
 " highlight Terminal           
 highlight Title            ctermfg=black    ctermbg=none   cterm=bold
 highlight Type             ctermfg=black    ctermbg=none   cterm=none
@@ -159,14 +191,14 @@ highlight VisualNOS        ctermfg=black    ctermbg=yellow cterm=none
 highlight WarningMsg       ctermfg=darkred  ctermbg=none   cterm=none
 highlight WildMenu         ctermfg=black    ctermbg=yellow cterm=none
 " highlight lCursor            
-""}}}
-" ultisnips{{{
+"
+" ultisnips
 let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsJumpForwardTrigger="<tab>"
 let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 let g:UltiSnipsSnippetDirectories=[ "my-snippets", "Ultisnips" ]
-"}}}
-" fzy{{{
+
+" fzy
 function! FzyCommand(choice_command, vim_command)
   try
     let output = system(a:choice_command . " | fzy ")
@@ -180,7 +212,7 @@ function! FzyCommand(choice_command, vim_command)
 endfunction
 
 nnoremap <leader>ff :call FzyCommand("rg . ~/foo.txt", ":r!echo")<cr>
-"}}}
+
 " ctrl p
 let g:ctrlp_extensions = ['tag', 'buffertag', 'quickfix', 'dir', 'rtscript',
                         \ 'undo', 'line', 'changes', 'mixed', 'bookmarkdir']

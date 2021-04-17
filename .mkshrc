@@ -9,7 +9,7 @@ HISTSIZE=10000
 AVEHIST=10000
 
 # windows user directory
-UP="$(cygpath $USERPROFILE)"
+win="$(cygpath $USERPROFILE)"
 
 
 # PS1
