@@ -96,6 +96,12 @@ augroup sh " {
     autocmd FileType sh nnoremap <buffer><leader>ri :!sh-pane<cr>
     autocmd FileType sh nnoremap <buffer><leader>ro :!tmux kill-pane -t {bottom-right}<cr>
 augroup END " }
+" py
+augroup python " {
+    autocmd!
+    autocmd FileType python nnoremap <buffer><leader>ri :!py-pane<cr>
+    autocmd FileType python nnoremap <buffer><leader>ro :!tmux kill-pane -t {bottom-right}<cr>
+augroup END " }
 
 " markdown
 augroup markdown " {
