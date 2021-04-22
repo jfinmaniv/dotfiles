@@ -16,7 +16,9 @@ PS1=$'\n\1\e[31m\$(exit=\$?; (( \$exit )) && print "\$exit ")'\
 $'\1\e[00m\1\e[37m\${PWD/$HOME/\\~}>\1\e[00m '
 
 # aliases
-alias cdd="cd $(cygpath $USERPROFILE)"
+alias cdd="cd $up/Downloads"
+alias cdt='cd "/r/RB3/Shared/TMDL_Wtrshd Assess/"'
+alias cdw='cd "/r/RB3/Shared/WQ Control Planning/"'
 alias dot='git --git-dir=$HOME/.dot.git/ --work-tree=$HOME'
 alias ll='ls -lhF --color'
 alias la='ls -AlhF --color'
