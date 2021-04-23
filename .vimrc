@@ -25,11 +25,11 @@ set number " print the line number in front of each line
 set pastetoggle=<insert> " key code that causes paste to toggle
 set ruler " show cursor line and column in the status line
 set shiftround " round indent to shiftwidth
-set shiftwidth=4 " number of spaces to use for (auto)indent step
+" set shiftwidth=4 " number of spaces to use for (auto)indent step
 set showbreak=+\  " hanging indents for wrapped lines
 set showcmd " show commands
 set smartcase " no ignore case when pattern has uppercase
-set tabstop=4 " number of spaces that <tab> in file uses
+" set tabstop=4 " number of spaces that <tab> in file uses
 set tags=./tags;
 set textwidth=78 " maximum width of text that is being inserted
 set undodir=~/.vim/undo " undo files here
