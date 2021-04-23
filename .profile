@@ -6,7 +6,7 @@ sumatra="/opt/sumatra-pdf"
 PATH=".:$scripts:$firefox:$sumatra:$tex:$PATH"
 
 # other variables
-BROWSER='/c/Users/JInman/firefox/firefox.exe'
+BROWSER='/opt/firefox/firefox.exe'
 CHERE_INVOKING=1 
 EDITOR=/usr/bin/vim
 TERM=xterm-256color

@@ -3,7 +3,8 @@ filetype plugin indent on " enables filetype detection
 syntax enable " enables syntax highlighting, keeping :highlight commands
 
 " variables
-let mapleader=" "
+let mapleader = " "
+let netrw_browsex_viewer = "/opt/firefox/firefox.exe"
 
 " options
 let g:markdown_folding = 1
@@ -43,13 +44,13 @@ set wildmenu
 
 " functions
 
-function HandleFile()
+function HandleLink()
         " file handler
         let link = @l
         let ext = fnamemodify(link, ':e')
         if ext == 'txt'
                 execute 'e' . fnameescape(link)
-        elseif ext == 'pdf'
+        elseif ext == 'pdf' && link[0:3] != 'http'
                 execute system('sumatra-pdf ' . fnameescape(link) . '&')
         else 
                 execute system('start "" ' . fnameescape(link) . '&')
@@ -58,7 +59,7 @@ endfunction
 
 " maps
 
-nnoremap <cr> "lyi):call HandleFile()<cr>
+nnoremap <cr> "lyi):call HandleLink()<cr>
 inoremap jk <esc>l
 nnoremap <f10>
         \ :echo synIDattr(synIDtrans(synID(line("."),col("."),1)),"name")<CR>
