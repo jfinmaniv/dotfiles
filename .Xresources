@@ -35,7 +35,7 @@
 ! *colorInnerBorder: true
 *termName: xterm-256color
 
-*faceName: xft:DejaVu Sans Mono:size=12
+*faceName: xft:DejaVu Sans Mono:size=14
 
 *scrollBar: false
 
