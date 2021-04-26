@@ -225,11 +225,11 @@ let g:ctrlp_extensions = ['tag', 'buffertag', 'quickfix', 'dir', 'rtscript',
                         \ 'undo', 'line', 'changes', 'mixed', 'bookmarkdir']
 
 " csv
-let g:csv_comment = '#'
-highlight   CSVColumnEven         ctermfg=black            ctermbg=none   cterm=none
-highlight   CSVColumnOdd          ctermfg=black            ctermbg=none   cterm=none
-highlight   CSVColumnHeaderEven   ctermfg=black            ctermbg=none   cterm=underline
-highlight   CSVColumnHeaderOdd    ctermfg=black            ctermbg=none   cterm=underline
+" let g:csv_comment = '#'
+" highlight   CSVColumnEven         ctermfg=black            ctermbg=none   cterm=none
+" highlight   CSVColumnOdd          ctermfg=black            ctermbg=none   cterm=none
+" highlight   CSVColumnHeaderEven   ctermfg=black            ctermbg=none   cterm=underline
+" highlight   CSVColumnHeaderOdd    ctermfg=black            ctermbg=none   cterm=underline
 
 " vimwiki
 let g:vimwiki_list = [{'path': '~/waterboard/notes/', 
