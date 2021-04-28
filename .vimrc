@@ -1,12 +1,12 @@
-" filetype, syntax
+" filetype, syntax{{{
 filetype plugin indent on " enables filetype detection
 syntax enable " enables syntax highlighting, keeping :highlight commands
-
-" variables
+"}}}
+" variables{{{
 let mapleader = " "
 let netrw_browsex_viewer = "/opt/firefox/firefox.exe"
-
-" options
+"}}}
+" options{{{
 let g:markdown_folding = 1
 set autoindent " take indent for new line from previous line
 set autoread " automatically read file when changed outside of vim
@@ -41,47 +41,67 @@ set undodir=~/.vim/undo " undo files here
 set undofile " persistent undo
 set virtualedit=block
 set wildmenu
-
-" functions
-
-function HandleLink()
-        " file handler
-        let link = @l
-        let ext = fnamemodify(link, ':e')
-        if ext == 'txt'
-                execute 'e' . fnameescape(link)
-        elseif ext == 'pdf' && link[0:3] != 'http'
-                execute system('sumatra-pdf ' . fnameescape(link) . '&')
-        else 
-                execute system('start "" ' . fnameescape(link) . '&')
-        endif
+"}}}
+" functions{{{
+function! HandleLink()"{{{
+    " open file with appropriate app
+    let link = @l
+    let ext = fnamemodify(link, ':e')
+    if ext == 'txt'
+        execute 'e' . fnameescape(link)
+    elseif ext == 'pdf' && link[0:3] != 'http'
+        execute system('sumatra-pdf ' . fnameescape(link) . '&')
+    else 
+        execute system('start "" ' . fnameescape(link) . '&')
+    endif
 endfunction
+"}}}
+function! FzyCommand(choice_command, vim_command)"{{{
+  try
+    let output = system(a:choice_command . " | fzy ")
+  catch /Vim:Interrupt/
+    " Swallow errors from ^C, allow redraw! below
+  endtry
+  redraw!
+  if v:shell_error == 0 && !empty(output)
+    exec a:vim_command . ' ' . output
+  endif
+endfunction
+"}}}
+"}}}
+" maps{{{
 
-" maps
+nnoremap <leader>ff :call FzyCommand("rg . ~/foo.txt", ":r!echo")<cr>
 
 nnoremap <cr> "lyi):call HandleLink()<cr>
 inoremap jk <esc>l
-nnoremap <f10>
+nnoremap <leader>hi
         \ :echo synIDattr(synIDtrans(synID(line("."),col("."),1)),"name")<CR>
 nnoremap <leader>si :e ~/.vim/my-snippets/
 nnoremap <leader>so <c-^>:bdelete snippets<cr>
         \ :call UltiSnips#RefreshSnippets()<cr>
-nnoremap <leader>vi :e $MYVIMRC<cr>
-nnoremap <leader>vo :w<cr><c-^>:bdelete .vimrc<cr>:source $MYVIMRC<cr>
-noremap <silent> Y 
-        \ "cy :redir! > /dev/clipboard \| silent echon @c \| redir END<cr>
+nnoremap <leader>vrc :e $MYVIMRC<cr>
+nnoremap <leader>vso :w<cr><c-^>:bdelete .vimrc<cr>:source $MYVIMRC<cr>
+" noremap <silent> Y 
+"         \ "cy :redir! > /dev/clipboard \| silent echon @c \| redir END<cr>
+noremap Y "*y
 nnoremap <silent> <leader>gd yi)"d:!start "" "$(dirname '<c-r>d')"<cr>
 " uses expression register:
-nnoremap <silent> <leader>cp 
-        \ "pyi)vi)c<c-r>=system('echo -n $(cygpath "<c-r>p")')<cr><esc>
-" 
-
-" command abbreviations
+nnoremap <silent> <leader>wtu
+        \ "pyi)vi)c<c-r>=system('cygpath -u "<c-r>p"')<cr><esc>
+nnoremap <silent> <leader>utw
+        \ "pyi)vi)c<c-r>=system('cygpath -w "<c-r>p"')<cr><esc>
+nnoremap <silent> <leader>ltr
+        \ "pyi)vi)c<c-r>=system('ltr "<c-r>p"')<cr><esc>
+nnoremap <silent> <leader>rtl
+        \ "pyi)vi)c<c-r>=system('rtl "<c-r>p"')<cr><esc>
+"}}}
+" command abbreviations{{{
 cnoreabbrev cdd lcd %:p:h
 cnoreabbrev h tab h
-
-" filetypes
-" r
+"}}}
+" filetypes{{{
+" r{{{
 augroup r " {
     autocmd!
     autocmd FileType r inoremap <buffer> < <-
@@ -89,53 +109,59 @@ augroup r " {
     autocmd FileType r nnoremap <buffer><leader>ri :!r-pane<cr>
     autocmd FileType r nnoremap <buffer><leader>ro :!tmux kill-pane -t {bottom-right}<cr>
     autocmd FileType r nnoremap <buffer><silent> K viw"ry:SlimeSend1 help(<c-r>r)<cr>
+    autocmd FileType r nmap <buffer> , <Plug>SlimeLineSend/^[^#\$]<cr>
+    autocmd FileType r xmap <buffer> , <Plug>SlimeRegionSend
+    autocmd FileType r nmap <buffer> <leader>, <Plug>SlimeParagraphSend}j
 augroup END " }
-" sh
+"}}}
+" sh{{{
 augroup sh " {
     autocmd!
     autocmd FileType sh setlocal noexpandtab
     autocmd FileType sh nnoremap <buffer><leader>ri :!sh-pane<cr>
     autocmd FileType sh nnoremap <buffer><leader>ro :!tmux kill-pane -t {bottom-right}<cr>
+    autocmd FileType sh nmap <buffer> , <Plug>SlimeLineSend/^[^#\$]<cr>
+    autocmd FileType sh xmap <buffer> , <Plug>SlimeRegionSend
+    autocmd FileType sh nmap <buffer> <leader>, <Plug>SlimeParagraphSend}j
 augroup END " }
-" py
+"}}}
+" py{{{
 augroup python " {
     autocmd!
     autocmd FileType python nnoremap <buffer><leader>ri :!py-pane<cr>
     autocmd FileType python nnoremap <buffer><leader>ro :!tmux kill-pane -t {bottom-right}<cr>
+    autocmd FileType python nmap <buffer> , <Plug>SlimeLineSend/^[^#\$]<cr>
+    autocmd FileType python xmap <buffer> , <Plug>SlimeRegionSend
+    autocmd FileType python nmap <buffer> <leader>, <Plug>SlimeParagraphSend}j
 augroup END " }
-
-" markdown
+"}}}
+" markdown{{{
 augroup markdown " {
     autocmd!
     autocmd FileType markdown set foldlevel=2 
+    autocmd FileType markdown set formatoptions-=t
     autocmd FileType markdown set textwidth=0 
     autocmd FileType markdown set tabstop=2 
     autocmd FileType markdown set shiftwidth=2
     autocmd FileType markdown set nowrap
 augroup END " }
-" slime
+"}}}
+"}}}
+" plugins{{{
+" slime{{{
 let g:slime_target = "tmux"
 let g:slime_default_config = {"socket_name": "default", "target_pane": "{bottom-right}"}
 let g:slime_dont_ask_default = 1
-augroup slime " {
-    autocmd!
-    autocmd FileType python,r,sh nmap <buffer> , <Plug>SlimeLineSend/^[^#\$]<cr>
-    autocmd FileType python,r,sh xmap <buffer> , <Plug>SlimeRegionSend
-    autocmd FileType python,r,sh nmap <buffer> <leader>, <Plug>SlimeParagraphSend}j
-augroup END " }
-
-" colors
-function! SynStack()
-  if !exists("*synstack")
-    return
-  endif
-  echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')
-endfunc
-map <F10> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<'
-\ . synIDattr(synID(line("."),col("."),0),"name") . "> lo<"
-\ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
-" black darkred darkgreen brown darkblue darkmagenta darkcyan gray
-" highlight ColorColumn        
+"}}}
+" ultisnips{{{
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<tab>"
+let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
+let g:UltiSnipsSnippetDirectories=[ "my-snippets", "Ultisnips" ]
+"}}}
+"}}}
+" colors{{{
+" color names: black darkred darkgreen brown darkblue darkmagenta darkcyan gray
 highlight Comment          ctermfg=gray     ctermbg=none   cterm=none
 highlight Conceal     ctermfg=gray     ctermbg=none   cterm=none
 highlight Constant         ctermfg=darkblue ctermbg=none   cterm=none
@@ -198,41 +224,4 @@ highlight VisualNOS        ctermfg=black    ctermbg=yellow cterm=none
 highlight WarningMsg       ctermfg=darkred  ctermbg=none   cterm=none
 highlight WildMenu         ctermfg=black    ctermbg=yellow cterm=none
 " highlight lCursor            
-"
-" ultisnips
-let g:UltiSnipsExpandTrigger="<tab>"
-let g:UltiSnipsJumpForwardTrigger="<tab>"
-let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
-let g:UltiSnipsSnippetDirectories=[ "my-snippets", "Ultisnips" ]
-
-" fzy
-function! FzyCommand(choice_command, vim_command)
-  try
-    let output = system(a:choice_command . " | fzy ")
-  catch /Vim:Interrupt/
-    " Swallow errors from ^C, allow redraw! below
-  endtry
-  redraw!
-  if v:shell_error == 0 && !empty(output)
-    exec a:vim_command . ' ' . output
-  endif
-endfunction
-
-nnoremap <leader>ff :call FzyCommand("rg . ~/foo.txt", ":r!echo")<cr>
-
-" ctrl p
-let g:ctrlp_extensions = ['tag', 'buffertag', 'quickfix', 'dir', 'rtscript',
-                        \ 'undo', 'line', 'changes', 'mixed', 'bookmarkdir']
-
-" csv
-let g:csv_comment = '#'
-highlight   CSVColumnEven         ctermfg=black            ctermbg=none   cterm=none
-highlight   CSVColumnOdd          ctermfg=black            ctermbg=none   cterm=none
-highlight   CSVColumnHeaderEven   ctermfg=black            ctermbg=none   cterm=underline
-highlight   CSVColumnHeaderOdd    ctermfg=black            ctermbg=none   cterm=underline
-
-" vimwiki
-let g:vimwiki_list = [{'path': '~/waterboard/notes/', 
-            \ 'syntax': 'markdown',
-            \ 'ext': '.txt'}]
-let g:vimwiki_global_ext = 0
+"}}}
