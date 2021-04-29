@@ -1,7 +1,7 @@
 # path
 scripts="$HOME/scripts"
 tex="/opt/texlive/2021/bin/win32"
-firefox="/opt/firefox/firefox.exe"
+firefox="/opt/firefox/"
 sumatra="/opt/sumatra-pdf"
 PATH=".:$scripts:$firefox:$sumatra:$tex:$PATH"
 

@@ -16,24 +16,29 @@ PS1=$'\n\1\e[31m\$(exit=\$?; (( \$exit )) && print "\$exit ")'\
 $'\1\e[00m\1\e[37m\${PWD/$HOME/\\~}>\1\e[00m '
 
 # aliases
+alias R='r-wrapper'
+alias bak='backup-file'
 alias cdd="cd $up/Downloads"
-alias cdt='cd "/r/RB3/Shared/TMDL_Wtrshd Assess/"'
-alias cdw='cd "/r/RB3/Shared/WQ Control Planning/"'
-alias cdr="source $HOME/scripts/go-to-remote"
 alias cdl="source $HOME/scripts/go-to-local"
+alias cdr="source $HOME/scripts/go-to-remote"
 alias dot='git --git-dir=$HOME/.dot.git/ --work-tree=$HOME'
-alias gtn='source go-to-network'
+alias dott='add-commit-push-dot'
+alias gitt='add-commit-push'
+alias kb='show-key-bindings'
 alias krc='vim ~/.mkshrc; . ~/.mkshrc'
 alias la='ls -AlhF --color'
 alias ll='ls -lhF --color'
-alias owrt='ssh root@192.168.1.1'
+alias mvv='batch-rename'
+alias sshr='ssh root@192.168.1.1'
 alias pdf='sumatra-pdf'
+alias pdff='markdown-to-pdf'
 alias ranger='source /usr/bin/ranger'
 alias reboot='cmd //c "shutdown /r /t 0"'
 alias restart='cmd //c "shutdown /r /t 0"'
 alias shutdown='cmd //c "shutdown /s /t 0"'
-alias tp='trash'
+alias tp='move-to-trash'
 alias trc='vim ~/.tmux.conf; tmux source-file ~/.tmux.conf'
+alias ubak='restore-file'
 
 # start tmux
 if [ -z "$TMUX" ]

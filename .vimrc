@@ -50,8 +50,11 @@ function! HandleLink()"{{{
     let link = @l
     let ext = fnamemodify(link, ':e')
     if ext[0:2] == 'txt'
+        " ge is part of platsicboy/vim-markdown plugin
         normal ge
-    elseif ext == 'pdf' && link[0:3] != 'http'
+    elseif link[0:3] == 'http'
+        normal gx
+    elseif ext == 'pdf'
         execute system('sumatra-pdf ' . fnameescape(link) . '&')
     else 
         execute system('start "" ' . fnameescape(link) . '&')
@@ -73,14 +76,14 @@ endfunction
 "}}}
 " maps{{{
 nnoremap <leader>ff :call FzyCommand("rg . ~/foo.txt", ":r!echo")<cr>
-nnoremap <cr> f("lyi):call HandleLink()<cr>
+nnoremap <cr> ^(lyi):call HandleLink()<cr>
 inoremap jk <esc>l
 nnoremap <leader>hi
         \ :echo synIDattr(synIDtrans(synID(line("."),col("."),1)),"name")<CR>
-nnoremap <leader>rcs :e ~/.vim/my-snippets/
+nnoremap <leader>src :e ~/.vim/my-snippets/
 nnoremap <leader>sos <c-^>:bdelete snippets<cr>
         \ :call UltiSnips#RefreshSnippets()<cr>
-nnoremap <leader>rcv :e $MYVIMRC<cr>
+nnoremap <leader>vrc :e $MYVIMRC<cr>
 nnoremap <leader>sov :w<cr><c-^>:bdelete .vimrc<cr>:source $MYVIMRC<cr>
 " noremap <silent> Y 
 "         \ "cy :redir! > /dev/clipboard \| silent echon @c \| redir END<cr>
@@ -92,9 +95,9 @@ nnoremap <silent> <leader>wtu
 nnoremap <silent> <leader>utw
         \ "pyi)vi)c<c-r>=system('cygpath -w "<c-r>p"')<cr><esc>
 nnoremap <silent> <leader>ltr
-        \ "pyi)vi)c<c-r>=system('ltr "<c-r>p"')<cr><esc>
+        \ "pyi)vi)c<c-r>=system('local-to-remote "<c-r>p"')<cr><esc>
 nnoremap <silent> <leader>rtl
-        \ "pyi)vi)c<c-r>=system('rtl "<c-r>p"')<cr><esc>
+        \ "pyi)vi)c<c-r>=system('remote-to-local "<c-r>p"')<cr><esc>
 "}}}
 " command abbreviations{{{
 cnoreabbrev cdd lcd %:p:h
@@ -106,7 +109,7 @@ augroup r " {
     autocmd!
     autocmd FileType r inoremap <buffer> < <-
     autocmd FileType r inoremap <buffer> << <
-    autocmd FileType r nnoremap <buffer><leader>ri :!r-pane<cr>
+    autocmd FileType r nnoremap <buffer><leader>ri :!open-r-repl<cr>
     autocmd FileType r nnoremap <buffer><leader>ro :!tmux kill-pane -t {bottom-right}<cr>
     autocmd FileType r nnoremap <buffer><silent> K viw"ry:SlimeSend1 help(<c-r>r)<cr>
     autocmd FileType r nmap <buffer> , <Plug>SlimeLineSend/^[^#\$]<cr>
@@ -118,7 +121,7 @@ augroup END " }
 augroup sh " {
     autocmd!
     autocmd FileType sh setlocal noexpandtab
-    autocmd FileType sh nnoremap <buffer><leader>ri :!sh-pane<cr>
+    autocmd FileType sh nnoremap <buffer><leader>ri :!open-sh-repl<cr>
     autocmd FileType sh nnoremap <buffer><leader>ro :!tmux kill-pane -t {bottom-right}<cr>
     autocmd FileType sh nmap <buffer> , <Plug>SlimeLineSend/^[^#\$]<cr>
     autocmd FileType sh xmap <buffer> , <Plug>SlimeRegionSend
@@ -128,7 +131,7 @@ augroup END " }
 " py{{{
 augroup python " {
     autocmd!
-    autocmd FileType python nnoremap <buffer><leader>ri :!py-pane<cr>
+    autocmd FileType python nnoremap <buffer><leader>ri :!open-python-repl<cr>
     autocmd FileType python nnoremap <buffer><leader>ro :!tmux kill-pane -t {bottom-right}<cr>
     autocmd FileType python nmap <buffer> , <Plug>SlimeLineSend/^[^#\$]<cr>
     autocmd FileType python xmap <buffer> , <Plug>SlimeRegionSend
