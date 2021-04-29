@@ -1,13 +1,15 @@
+" vim: set foldlevel=0:
 " filetype, syntax{{{
 filetype plugin indent on " enables filetype detection
 syntax enable " enables syntax highlighting, keeping :highlight commands
 "}}}
 " variables{{{
 let mapleader = " "
+" supposed to make gx work but doesn't:
 let netrw_browsex_viewer = "/opt/firefox/firefox.exe"
+let markdown_folding = 1
 "}}}
 " options{{{
-let g:markdown_folding = 1
 set autoindent " take indent for new line from previous line
 set autoread " automatically read file when changed outside of vim
 set autowriteall " automatically write file if changed
@@ -47,8 +49,8 @@ function! HandleLink()"{{{
     " open file with appropriate app
     let link = @l
     let ext = fnamemodify(link, ':e')
-    if ext == 'txt'
-        execute 'e' . fnameescape(link)
+    if ext[0:2] == 'txt'
+        normal ge
     elseif ext == 'pdf' && link[0:3] != 'http'
         execute system('sumatra-pdf ' . fnameescape(link) . '&')
     else 
@@ -70,18 +72,16 @@ endfunction
 "}}}
 "}}}
 " maps{{{
-
 nnoremap <leader>ff :call FzyCommand("rg . ~/foo.txt", ":r!echo")<cr>
-
-nnoremap <cr> "lyi):call HandleLink()<cr>
+nnoremap <cr> f("lyi):call HandleLink()<cr>
 inoremap jk <esc>l
 nnoremap <leader>hi
         \ :echo synIDattr(synIDtrans(synID(line("."),col("."),1)),"name")<CR>
-nnoremap <leader>si :e ~/.vim/my-snippets/
-nnoremap <leader>so <c-^>:bdelete snippets<cr>
+nnoremap <leader>rcs :e ~/.vim/my-snippets/
+nnoremap <leader>sos <c-^>:bdelete snippets<cr>
         \ :call UltiSnips#RefreshSnippets()<cr>
-nnoremap <leader>vrc :e $MYVIMRC<cr>
-nnoremap <leader>vso :w<cr><c-^>:bdelete .vimrc<cr>:source $MYVIMRC<cr>
+nnoremap <leader>rcv :e $MYVIMRC<cr>
+nnoremap <leader>sov :w<cr><c-^>:bdelete .vimrc<cr>:source $MYVIMRC<cr>
 " noremap <silent> Y 
 "         \ "cy :redir! > /dev/clipboard \| silent echon @c \| redir END<cr>
 noremap Y "*y
@@ -144,6 +144,7 @@ augroup markdown " {
     autocmd FileType markdown set tabstop=2 
     autocmd FileType markdown set shiftwidth=2
     autocmd FileType markdown set nowrap
+    autocmd FileType markdown set conceallevel=2
 augroup END " }
 "}}}
 "}}}
@@ -158,6 +159,11 @@ let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsJumpForwardTrigger="<tab>"
 let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 let g:UltiSnipsSnippetDirectories=[ "my-snippets", "Ultisnips" ]
+"}}}
+" vim markdown{{{
+let g:vim_markdown_follow_anchor = 1
+let g:vim_markdown_new_list_item_indent = 0
+let g:vim_markdown_folding_disabled = 1
 "}}}
 "}}}
 " colors{{{
@@ -179,7 +185,7 @@ highlight EndOfBuffer      ctermfg=gray     ctermbg=none   cterm=none
 highlight Error            ctermfg=darkred  ctermbg=none   cterm=none
 highlight ErrorMsg         ctermfg=darkred  ctermbg=none   cterm=none
 " highlight FoldColumn         
-highlight Folded           ctermfg=gray     ctermbg=white  cterm=none
+highlight Folded           ctermfg=black     ctermbg=none  cterm=none
 highlight Identifier       ctermfg=black    ctermbg=none   cterm=none
 highlight Ignore           ctermfg=gray     ctermbg=none   cterm=none
 highlight IncSearch        ctermfg=black    ctermbg=yellow cterm=none
