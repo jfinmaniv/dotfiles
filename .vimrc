@@ -55,10 +55,12 @@ function! HandleLink()"{{{
     elseif link[0:3] == 'http'
         normal gx
     elseif ext == 'pdf'
-        execute system('sumatra-pdf ' . fnameescape(link) . '&')
+        call system('sumatra-pdf ' . fnameescape(link) . '&')
     else 
-        execute system('start "" ' . fnameescape(link) . '&')
+        call system('start "" ' . fnameescape(link) . '&')
     endif
+    " replace contents of unnamed register for pasting after following link
+    let @"=@1
 endfunction
 "}}}
 function! FzyCommand(choice_command, vim_command)"{{{
@@ -76,15 +78,15 @@ endfunction
 "}}}
 " maps{{{
 nnoremap <leader>ff :call FzyCommand("rg . ~/foo.txt", ":r!echo")<cr>
-nnoremap <cr> ^(lyi):call HandleLink()<cr>
+nnoremap <cr> ^f("lyi):call HandleLink()<cr>
 inoremap jk <esc>l
 nnoremap <leader>hi
         \ :echo synIDattr(synIDtrans(synID(line("."),col("."),1)),"name")<CR>
-nnoremap <leader>src :e ~/.vim/my-snippets/
-nnoremap <leader>sos <c-^>:bdelete snippets<cr>
+nnoremap <leader>si :e ~/.vim/my-snippets/
+nnoremap <leader>so <c-^>:bdelete snippets<cr>
         \ :call UltiSnips#RefreshSnippets()<cr>
-nnoremap <leader>vrc :e $MYVIMRC<cr>
-nnoremap <leader>sov :w<cr><c-^>:bdelete .vimrc<cr>:source $MYVIMRC<cr>
+nnoremap <leader>vi :e $MYVIMRC<cr>
+nnoremap <leader>vo :w<cr><c-^>:bdelete .vimrc<cr>:source $MYVIMRC<cr>
 " noremap <silent> Y 
 "         \ "cy :redir! > /dev/clipboard \| silent echon @c \| redir END<cr>
 noremap Y "*y
@@ -167,6 +169,8 @@ let g:UltiSnipsSnippetDirectories=[ "my-snippets", "Ultisnips" ]
 let g:vim_markdown_follow_anchor = 1
 let g:vim_markdown_new_list_item_indent = 0
 let g:vim_markdown_folding_disabled = 1
+let g:vim_markdown_anchorexpr = 'substitute(v:anchor, "-", " ", "g")'
+
 "}}}
 "}}}
 " colors{{{
