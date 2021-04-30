@@ -10,27 +10,35 @@ let netrw_browsex_viewer = "/opt/firefox/firefox.exe"
 let markdown_folding = 1
 "}}}
 " options{{{
+
+" set number " print the line number in front of each line
+" set numberwidth=2 " min width
+set fillchars=vert:\ ,fold:\ ,eob:\ 
 set autoindent " take indent for new line from previous line
 set autoread " automatically read file when changed outside of vim
 set autowriteall " automatically write file if changed
 set background=light " 'dark' or 'light' used for highlight colors
-set backspace=indent,eol,start " how backspace works at start of line
+set backspace=indent,eol,start " Allow backspacing over everything in insert mode.
 set breakindent " wrapped lines are indented same as beginning of line
 set complete=.,w,b,u,t,i,k " added k for dictionary search
+set display=truncate " Show @@@ in the last line if it is truncated.
 set encoding=utf-8
 set expandtab " use spaces when <tab> is inserted
 set foldmethod=marker " folding type
-set nohlsearch
+set history=200		" keep 200 lines of command line history
 set ignorecase " ignore case
-set incsearch
+set incsearch " Do incremental searching
 set laststatus=0
 set linebreak " wrap long lines at a blank
 set modeline
 set modelines=1
+set mouse=a " Only xterm can grab the mouse events when using the shift key
+set nohlsearch
 set nowrapscan
-" set number " print the line number in front of each line
+set nrformats-=octal " Do not recognize octal numbers for Ctrl-A and Ctrl-X
 set pastetoggle=<insert> " key code that causes paste to toggle
-set ruler " show cursor line and column in the status line
+set ruler		" show the cursor position all the time
+set scrolloff=5 " Show a few lines of context around the cursor
 set shiftround " round indent to shiftwidth
 set shiftwidth=4 " number of spaces to use for (auto)indent step
 set showbreak=+\  " hanging indents for wrapped lines
@@ -39,10 +47,13 @@ set smartcase " no ignore case when pattern has uppercase
 set t_Co=16 " get rid of bold light colors
 set tabstop=4 " number of spaces that <tab> in file uses
 set textwidth=78 " maximum width of text that is being inserted
+set ttimeout		" time out for key codes
+set ttimeoutlen=100	" wait up to 100ms after Esc for special key
 set undodir=~/.vim/undo " undo files here
 set undofile " persistent undo
 set virtualedit=block
-set wildmenu
+set wildmenu		" display completion matches in a status line
+
 "}}}
 " functions{{{
 function! HandleLink()"{{{
@@ -77,6 +88,10 @@ endfunction
 "}}}
 "}}}
 " maps{{{
+" Don't use Ex mode, use Q for formatting.
+map Q gq
+" so that you can undo CTRL-U after inserting a line break.
+inoremap <C-U> <C-G>u<C-U> 
 nnoremap <leader>ff :call FzyCommand("rg . ~/foo.txt", ":r!echo")<cr>
 nnoremap <cr> ^f("lyi):call HandleLink()<cr>
 inoremap jk <esc>l
@@ -150,7 +165,6 @@ augroup markdown " {
     autocmd FileType markdown set shiftwidth=2
     autocmd FileType markdown set nowrap
     autocmd FileType markdown set conceallevel=2
-    autocmd FileType markdown set fillchars=vert:\|,fold:\ ,eob:~
 augroup END " }
 "}}}
 "}}}
@@ -197,7 +211,7 @@ highlight Folded           ctermfg=black     ctermbg=none  cterm=none
 highlight Identifier       ctermfg=black    ctermbg=none   cterm=none
 highlight Ignore           ctermfg=gray     ctermbg=none   cterm=none
 highlight IncSearch        ctermfg=black    ctermbg=yellow cterm=none
-highlight LineNr           ctermfg=gray     ctermbg=white  cterm=none
+highlight LineNr           ctermfg=gray     ctermbg=none  cterm=none
 " highlight LineNrAbove        
 " highlight LineNrBelow        
 highlight MatchParen       ctermfg=black    ctermbg=yellow cterm=none
