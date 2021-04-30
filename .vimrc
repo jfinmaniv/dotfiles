@@ -150,6 +150,7 @@ augroup markdown " {
     autocmd FileType markdown set shiftwidth=2
     autocmd FileType markdown set nowrap
     autocmd FileType markdown set conceallevel=2
+    autocmd FileType markdown set fillchars=vert:\|,fold:\ ,eob:~
 augroup END " }
 "}}}
 "}}}
