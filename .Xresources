@@ -38,6 +38,7 @@
 *faceName: xft:DejaVu Sans Mono:size=14
 
 *scrollBar: false
+! *maximized: true
 
 ! The following two settings may be specific to xterm.
 ! As it sounds. allows for emacs bindings in terminal.  

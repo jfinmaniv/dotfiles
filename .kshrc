@@ -27,6 +27,7 @@ SAVEHIST=10000
 export PS1='\n\e[31m$(x=$?; (( $x )) && print "$x ")\e[00m\e[37m\w\$\e[00m '
 
 # aliases
+alias crc='vim ~/.cwmrc; pkill -HUP cwm'
 alias altwin='toggle-alt-win'
 alias cdd="cd $up/Downloads"
 alias cdt='cd "/r/RB3/Shared/TMDL_Wtrshd Assess/"'
