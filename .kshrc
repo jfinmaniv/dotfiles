@@ -8,7 +8,7 @@ export PATH=".:$scripts:$firefox:$sumatra:$tex:$PATH"
 # other variables
 export BROWSER='/opt/firefox/firefox.exe'
 export CHERE_INVOKING=1 
-export EDITOR=/usr/bin/vim
+export EDITOR=/usr/local/bin/vim
 export TERM=xterm-256color
 export MOZ_ACCELERATED=1
 
