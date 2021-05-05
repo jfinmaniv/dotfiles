@@ -60,15 +60,17 @@ function! HandleLink()"{{{
     " open file with appropriate app
     let link = @l
     let ext = fnamemodify(link, ':e')
-    if ext[0:2] == 'txt'
+    if isdirectory(link)
+        call system('tmux split-window -c "' . link . '" $SHELL')
+    elseif ext[0:2] == 'txt'
         " ge is part of platsicboy/vim-markdown plugin
         normal ge
     elseif link[0:3] == 'http'
         normal gx
     elseif ext == 'pdf'
-        call system('sumatra-pdf ' . fnameescape(link) . '&')
+        call system('sumatra-pdf ' . fnameescape(link) . ' &')
     else 
-        call system('start "" ' . fnameescape(link) . '&')
+        call system('start "" ' . fnameescape(link) . ' &')
     endif
     " replace contents of unnamed register for pasting after following link
     let @"=@1
