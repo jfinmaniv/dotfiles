@@ -108,9 +108,9 @@ noremap Y "*y
 nnoremap <silent> <leader>gd yi)"d:!start "" "$(dirname '<c-r>d')"<cr>
 " uses expression register:
 nnoremap <silent> <leader>wtu
-        \ "pyi)vi)c<c-r>=system('cygpath -u "<c-r>p"')<cr><esc>
+        \ "pyi)vi)c<c-r>=system('cygpath -u "<c-r>p" \| tr -d "\n"')<cr><esc>
 nnoremap <silent> <leader>utw
-        \ "pyi)vi)c<c-r>=system('cygpath -w "<c-r>p"')<cr><esc>
+        \ "pyi)vi)c<c-r>=system('cygpath -w "<c-r>p" \| tr -d "\n"')<cr><esc>
 nnoremap <silent> <leader>ltr
         \ "pyi)vi)c<c-r>=system('local-to-remote "<c-r>p"')<cr><esc>
 nnoremap <silent> <leader>rtl
