@@ -28,6 +28,10 @@ alias kb='show-key-bindings'
 alias krc='vim ~/.mkshrc; . ~/.mkshrc'
 alias ls='ls -1'
 alias la='ls -AlhF --color'
+<<<<<<< HEAD
+alias laa='ls -AlhFd --color .*'
+=======
+>>>>>>> bd073e35fda7c0c0c00124f334791abe81bc585e
 alias ll='ls -lhF --color'
 alias mvv='batch-rename'
 alias sshr='ssh root@192.168.1.1'
