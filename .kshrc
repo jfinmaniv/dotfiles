@@ -1,18 +1,3 @@
-# path
-scripts="$HOME/scripts"
-tex="/opt/texlive/2021/bin/win32"
-firefox="/opt/firefox/firefox.exe"
-sumatra="/opt/sumatra-pdf"
-export PATH=".:$scripts:$firefox:$sumatra:$tex:$PATH"
-
-# other variables
-export BROWSER='/opt/firefox/firefox.exe'
-export CHERE_INVOKING=1 
-export EDITOR=/usr/local/bin/vim
-export TERM=xterm-256color
-export MOZ_ACCELERATED=1
-
-
 # options
 set -o emacs
 bind ^l=clear-screen
@@ -24,7 +9,8 @@ HISTSIZE=10000
 SAVEHIST=10000
 
 # PS1
-export PS1='\n\e[31m$(x=$?; (( $x )) && print "$x ")\e[00m\e[37m\w\$\e[00m '
+export PS1='\n\e[0;31m$(x=$?; (( $x )) && print "$x
+")\e[00m\e[1;30m\w\$\e[00m '
 
 # aliases
 alias crc='vim ~/.cwmrc; pkill -HUP cwm'
@@ -36,7 +22,7 @@ alias dot='git --git-dir=$HOME/.dot.git/ --work-tree=$HOME'
 alias ll='ls -lhF'
 alias la='ls -AlhF'
 alias owrt='ssh root@192.168.1.1'
-alias ranger='source /usr/bin/ranger'
+alias ranger='. /usr/local/bin/ranger'
 alias pdf='sumatra-pdf'
 alias rs='rsync -rltuvPh'
 alias krc='vim ~/.kshrc; . ~/.kshrc'

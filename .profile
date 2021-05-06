@@ -1,13 +1,13 @@
 # path
-scripts="$HOME/scripts"
-tex="/opt/texlive/2021/bin/win32"
-firefox="/opt/firefox/firefox.exe"
-sumatra="/opt/sumatra-pdf"
-PATH=".:$scripts:$firefox:$sumatra:$tex:$PATH"
+export PATH=".:$HOME/scripts:$PATH"
 
 # other variables
-BROWSER='/opt/firefox/firefox.exe'
-CHERE_INVOKING=1 
-EDITOR=/usr/bin/vim
-TERM=xterm-256color
-ENV=$HOME/.kshrc
+export EDITOR=/usr/local/bin/vim
+export TERM=xterm-256color
+export ENV=$HOME/.kshrc
+
+# firefox
+export MOZ_ACCELERATED=1
+export MOZ_WEBRENDER=1
+
+

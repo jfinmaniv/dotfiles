@@ -1,0 +1,40 @@
+#!/bin/sh
+
+# path
+export PATH=".:$HOME/scripts:$PATH"
+
+# other variables
+export EDITOR=/usr/local/bin/vim
+export TERM=xterm-256color
+export ENV=$HOME/.kshrc
+
+# firefox
+export MOZ_ACCELERATED=1
+export MOZ_WEBRENDER=1
+
+# fonts
+for font in /usr/local/share/fonts/*
+do
+	xset +fp $font
+done
+
+# x utilities
+xrdb .Xresources
+numlockx
+unclutter -root -noevents &
+
+# status bar
+while true
+do
+	get-status
+	sleep 60
+done | draw-status-bar &
+
+sleep 1 \
+	&& xterm &
+
+sleep 2 \
+	&& xdotool search . behave %@ focus exec get-status \
+	| draw-status-bar &
+
+cwm
