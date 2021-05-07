@@ -27,14 +27,7 @@ unclutter -root -noevents &
 while true
 do
 	get-status
-	sleep 60
-done | draw-status-bar &
-
-sleep 1 \
-	&& xterm &
-
-sleep 2 \
-	&& xdotool search . behave %@ focus exec get-status \
-	| draw-status-bar &
+	sleep 1
+done | draw-status &
 
 cwm
