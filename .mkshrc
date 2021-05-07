@@ -16,6 +16,7 @@ PS1=$'\n\1\e[31m\$(exit=\$?; (( \$exit )) && print "\$exit ")'\
 $'\1\e[00m\1\e[37m\${PWD/$HOME/\\~}>\1\e[00m '
 
 # aliases
+alias bgg='do-in-background '
 alias R='r-wrapper'
 alias bak='backup-file'
 alias cdd="cd $up/Downloads"
@@ -28,10 +29,7 @@ alias kb='show-key-bindings'
 alias krc='vim ~/.mkshrc; . ~/.mkshrc'
 alias ls='ls -1'
 alias la='ls -AlhF --color'
-<<<<<<< HEAD
 alias laa='ls -AlhFd --color .*'
-=======
->>>>>>> bd073e35fda7c0c0c00124f334791abe81bc585e
 alias ll='ls -lhF --color'
 alias mvv='batch-rename'
 alias sshr='ssh root@192.168.1.1'

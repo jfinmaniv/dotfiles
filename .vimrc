@@ -253,5 +253,6 @@ highlight Visual           ctermfg=black    ctermbg=yellow cterm=none
 highlight VisualNOS        ctermfg=black    ctermbg=yellow cterm=none
 highlight WarningMsg       ctermfg=darkred  ctermbg=none   cterm=none
 highlight WildMenu         ctermfg=black    ctermbg=yellow cterm=none
+highlight htmlItalic       ctermfg=black    ctermbg=yellow cterm=none
 " highlight lCursor            
 "}}}

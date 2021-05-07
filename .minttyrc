@@ -1,5 +1,5 @@
-Font=Consolas
-FontHeight=14
+Font=Terminus
+FontHeight=12
 ClipShortcuts=yes
 WindowShortcuts=no
 SwitchShortcuts=no
@@ -33,3 +33,9 @@ Rows=46
 Transparency=off
 Scrollbar=none
 Term=xterm-256color
+FontWeight=700
+FontIsBold=yes
+FontSmoothing=none
+EmojiPlacement=stretch
+Locale=en_US
+Charset=UTF-8
