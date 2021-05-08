@@ -9,8 +9,8 @@ HISTSIZE=10000
 SAVEHIST=10000
 
 # PS1
-export PS1='\n\e[0;31m$(x=$?; (( $x )) && print "$x
-")\e[00m\e[1;30m\w\$\e[00m '
+export PS1='\n\e[01;31m$(x=$?; (( $x )) && print "$x
+")\e[00m\e[01;30m\w\$\e[00m '
 
 # aliases
 alias crc='vim ~/.cwmrc; pkill -HUP cwm'
@@ -30,4 +30,5 @@ alias trc='vim ~/.tmux.conf; tmux source-file ~/.tmux.conf'
 alias tp='trash'
 alias mnas='doas sshfs root@192.168.1.1:/mnt /mnt/nas -o allow_other'
 alias unas='doas umount /mnt/nas'
-alias shutdown='doas shutdown -p now'
+alias halt='doas halt -p'
+alias reboot='reboot'

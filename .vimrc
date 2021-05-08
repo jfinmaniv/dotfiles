@@ -196,66 +196,66 @@ let g:vim_markdown_anchorexpr = 'substitute(v:anchor, "-", " ", "g")'
 "}}}
 " colors{{{
 " color names: black darkred darkgreen brown darkblue darkmagenta darkcyan gray
-highlight Comment          ctermfg=darkgray     ctermbg=none   cterm=none
-highlight Conceal     ctermfg=darkgray     ctermbg=none   cterm=none
-highlight Constant         ctermfg=darkblue ctermbg=none   cterm=none
-" highlight Cursor             
-" highlight CursorColumn       
-" highlight CursorIM           
-" highlight CursorLine         
-" highlight CursorLineNr       
-highlight DiffAdd          ctermfg=green    ctermbg=none   cterm=none
-highlight DiffChange       ctermfg=black    ctermbg=none   cterm=none
-highlight DiffDelete       ctermfg=darkred  ctermbg=none   cterm=none
-highlight DiffText         ctermfg=green    ctermbg=none   cterm=none
-" highlight Directory          
-highlight EndOfBuffer      ctermfg=darkgray     ctermbg=none   cterm=none
-highlight Error            ctermfg=darkred  ctermbg=none   cterm=none
-highlight ErrorMsg         ctermfg=darkred  ctermbg=none   cterm=none
-" highlight FoldColumn         
-highlight Folded           ctermfg=black     ctermbg=none  cterm=none
-highlight Identifier       ctermfg=black    ctermbg=none   cterm=none
-highlight Ignore           ctermfg=darkgray     ctermbg=none   cterm=none
-highlight IncSearch        ctermfg=black    ctermbg=yellow cterm=none
-highlight LineNr           ctermfg=darkgray     ctermbg=none  cterm=none
-" highlight LineNrAbove        
-" highlight LineNrBelow        
-highlight MatchParen       ctermfg=black    ctermbg=yellow cterm=none
-" highlight ModeMsg            
-" highlight MoreMsg            
-highlight NonText          ctermfg=darkgray     ctermbg=none   cterm=none
-" highlight Normal             
-highlight Pmenu            ctermfg=darkgray    ctermbg=white  cterm=none
-highlight PmenuSbar        ctermfg=none     ctermbg=white  cterm=none
-highlight PmenuSel         ctermfg=black    ctermbg=yellow cterm=none
-highlight PmenuThumb       ctermfg=black    ctermbg=white  cterm=none
-highlight PreProc          ctermfg=black    ctermbg=none   cterm=none
-" highlight Question           
-" highlight QuickFixLine       
-highlight Search           ctermfg=black    ctermbg=yellow cterm=none
-" highlight SignColumn         
-highlight Special          ctermfg=green    ctermbg=none   cterm=none
-highlight SpecialKey       ctermfg=darkgray     ctermbg=none   cterm=none
-highlight SpellBad         ctermfg=darkred  ctermbg=none   cterm=none
-highlight SpellCap         ctermfg=darkred  ctermbg=none   cterm=none
-highlight SpellLocal         ctermfg=darkred  ctermbg=none   cterm=none
-highlight SpellRare         ctermfg=darkred  ctermbg=none   cterm=none
-highlight Statement        ctermfg=black    ctermbg=none   cterm=none
-highlight StatusLine       ctermfg=darkgray     ctermbg=white  cterm=none
-highlight StatusLineNC     ctermfg=white    ctermbg=white  cterm=none
-highlight StatusLineTerm   ctermfg=darkgray     ctermbg=white  cterm=none
-highlight StatusLineTermNC ctermfg=white    ctermbg=white  cterm=none
-highlight TabLine          ctermfg=darkgray    ctermbg=white  cterm=none          
-highlight TabLineFill      ctermfg=black    ctermbg=white  cterm=none          
-highlight TabLineSel       ctermfg=black    ctermbg=none  cterm=none          
-" highlight Terminal           
-highlight Title            ctermfg=black    ctermbg=none   cterm=bold
-highlight Type             ctermfg=black    ctermbg=none   cterm=none
-highlight Underlined       ctermfg=black    ctermbg=none   cterm=underline
-highlight VertSplit        ctermfg=white    ctermbg=white  cterm=none
-highlight Visual           ctermfg=black    ctermbg=yellow cterm=none
-highlight VisualNOS        ctermfg=black    ctermbg=yellow cterm=none
-highlight WarningMsg       ctermfg=darkred  ctermbg=none   cterm=none
-highlight WildMenu         ctermfg=black    ctermbg=yellow cterm=none
-" highlight lCursor            
+highlight   Comment            ctermfg=darkgray   ctermbg=none     cterm=none
+highlight   Conceal            ctermfg=darkgray   ctermbg=none     cterm=none
+highlight   Constant           ctermfg=darkblue   ctermbg=none     cterm=none
+"           highlight          Cursor
+"           highlight          CursorColumn
+"           highlight          CursorIM
+"           highlight          CursorLine
+"           highlight          CursorLineNr
+highlight   DiffAdd            ctermfg=darkgreen      ctermbg=none     cterm=none
+highlight   DiffChange         ctermfg=black      ctermbg=none     cterm=none
+highlight   DiffDelete         ctermfg=red    ctermbg=none     cterm=none
+highlight   DiffText           ctermfg=darkgreen      ctermbg=none     cterm=none
+"           highlight          Directory
+highlight   EndOfBuffer        ctermfg=darkgray   ctermbg=none     cterm=none
+highlight   Error              ctermfg=red    ctermbg=none     cterm=none
+highlight   ErrorMsg           ctermfg=red    ctermbg=none     cterm=none
+"           highlight          FoldColumn
+highlight   Folded             ctermfg=black      ctermbg=none     cterm=none
+highlight   Identifier         ctermfg=black      ctermbg=none     cterm=none
+highlight   Ignore             ctermfg=darkgray   ctermbg=none     cterm=none
+highlight   IncSearch          ctermfg=black      ctermbg=yellow   cterm=none
+highlight   LineNr             ctermfg=darkgray   ctermbg=none     cterm=none
+"           highlight          LineNrAbove
+"           highlight          LineNrBelow
+highlight   MatchParen         ctermfg=black      ctermbg=yellow   cterm=none
+"           highlight          ModeMsg
+"           highlight          MoreMsg
+highlight   NonText            ctermfg=darkgray   ctermbg=none     cterm=none
+"           highlight          Normal
+highlight   Pmenu              ctermfg=darkgray   ctermbg=gray    cterm=none
+highlight   PmenuSbar          ctermfg=none       ctermbg=gray    cterm=none
+highlight   PmenuSel           ctermfg=black      ctermbg=yellow   cterm=none
+highlight   PmenuThumb         ctermfg=black      ctermbg=gray    cterm=none
+highlight   PreProc            ctermfg=black      ctermbg=none     cterm=none
+"           highlight          Question
+"           highlight          QuickFixLine
+highlight   Search             ctermfg=black      ctermbg=yellow   cterm=none
+"           highlight          SignColumn
+highlight   Special            ctermfg=darkgreen      ctermbg=none     cterm=none
+highlight   SpecialKey         ctermfg=darkgray   ctermbg=none     cterm=none
+highlight   SpellBad           ctermfg=red    ctermbg=none     cterm=none
+highlight   SpellCap           ctermfg=red    ctermbg=none     cterm=none
+highlight   SpellLocal         ctermfg=red    ctermbg=none     cterm=none
+highlight   SpellRare          ctermfg=red    ctermbg=none     cterm=none
+highlight   Statement          ctermfg=black      ctermbg=none     cterm=none
+highlight   StatusLine         ctermfg=darkgray   ctermbg=gray    cterm=none
+highlight   StatusLineNC       ctermfg=gray      ctermbg=white    cterm=none
+highlight   StatusLineTerm     ctermfg=darkgray   ctermbg=gray    cterm=none
+highlight   StatusLineTermNC   ctermfg=gray      ctermbg=white    cterm=none
+highlight   TabLine            ctermfg=darkgray   ctermbg=gray    cterm=none
+highlight   TabLineFill        ctermfg=black      ctermbg=gray    cterm=none
+highlight   TabLineSel         ctermfg=black      ctermbg=none     cterm=none
+"           highlight          Terminal
+highlight   Title              ctermfg=black      ctermbg=none     cterm=bold
+highlight   Type               ctermfg=black      ctermbg=none     cterm=none
+highlight   Underlined         ctermfg=black      ctermbg=none     cterm=underline
+highlight   VertSplit          ctermfg=gray      ctermbg=white    cterm=none
+highlight   Visual             ctermfg=black      ctermbg=yellow   cterm=none
+highlight   VisualNOS          ctermfg=black      ctermbg=yellow   cterm=none
+highlight   WarningMsg         ctermfg=red    ctermbg=none     cterm=none
+highlight   WildMenu           ctermfg=black      ctermbg=yellow   cterm=none
+"           highlight          lCursor
 "}}}

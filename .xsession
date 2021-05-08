@@ -22,6 +22,7 @@ done
 xrdb .Xresources
 numlockx
 unclutter -root -noevents &
+xmodmap .xmodmaprc
 
 # status bar
 while true
