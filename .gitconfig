@@ -1,0 +1,5 @@
+[credential]
+	helper = store
+[user]
+	name = John Inman
+	email = jfinmaniv@icloud.com
