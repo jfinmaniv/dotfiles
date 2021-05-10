@@ -7,6 +7,7 @@ export PATH=".:$HOME/scripts:$PATH"
 export EDITOR=/usr/local/bin/vim
 export TERM=xterm-256color
 export ENV=$HOME/.kshrc
+export LC_CTYPE="en_US.UTF-8"
 
 # firefox
 export MOZ_ACCELERATED=1
@@ -23,12 +24,6 @@ xrdb .Xresources
 numlockx
 unclutter -root -noevents &
 xmodmap .xmodmaprc
-
-# status bar
-while true
-do
-	get-status
-	sleep 1
-done | draw-status &
+draw-status &
 
 cwm
