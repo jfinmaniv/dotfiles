@@ -24,6 +24,9 @@ xrdb .Xresources
 numlockx
 unclutter -root -noevents &
 xmodmap .xmodmaprc
-draw-status &
+
+# status bar
+status-print | status-draw &
+status-watch &
 
 cwm
