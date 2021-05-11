@@ -39,3 +39,5 @@ FontSmoothing=none
 EmojiPlacement=stretch
 Locale=en_US
 Charset=UTF-8
+BoldAsFont=no
+BoldAsColour=no
