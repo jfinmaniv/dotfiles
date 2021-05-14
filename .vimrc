@@ -11,8 +11,6 @@ let markdown_folding = 1
 "}}}
 " options{{{
 
-" set number " print the line number in front of each line
-" set numberwidth=2 " min width
 set fillchars=vert:\ ,fold:\ ,eob:\ 
 set autoindent " take indent for new line from previous line
 set autoread " automatically read file when changed outside of vim
@@ -94,6 +92,10 @@ endfunction
 map Q gq
 " so that you can undo CTRL-U after inserting a line break.
 inoremap <C-U> <C-G>u<C-U> 
+nnoremap <c-j> :bnext<cr>
+nnoremap <c-k> :bNext<cr>
+nnoremap <c-h> :bdelete<cr>
+nnoremap <c-p> :ls<cr>:b 
 nnoremap <leader>ff :call FzyCommand("rg . ~/foo.txt", ":r!echo")<cr>
 nnoremap <cr> ^f("lyi):call HandleLink()<cr>
 inoremap jk <esc>l
@@ -166,6 +168,7 @@ augroup markdown " {
     autocmd FileType markdown set tabstop=2 
     autocmd FileType markdown set shiftwidth=2
     autocmd FileType markdown set nowrap
+    autocmd FileType markdown set concealcursor=nc
     autocmd FileType markdown set conceallevel=2
 augroup END " }
 "}}}
@@ -191,68 +194,84 @@ let g:vim_markdown_anchorexpr = 'substitute(v:anchor, "-", " ", "g")'
 "}}}
 "}}}
 " colors{{{
-" color names: black darkred darkgreen brown darkblue darkmagenta darkcyan gray
-highlight Comment          ctermfg=gray     ctermbg=none   cterm=none
-highlight Conceal     ctermfg=gray     ctermbg=none   cterm=none
-highlight Constant         ctermfg=darkblue ctermbg=none   cterm=none
-" highlight Cursor             
-" highlight CursorColumn       
-" highlight CursorIM           
-" highlight CursorLine         
-" highlight CursorLineNr       
-highlight DiffAdd          ctermfg=green    ctermbg=none   cterm=none
-highlight DiffChange       ctermfg=black    ctermbg=none   cterm=none
-highlight DiffDelete       ctermfg=darkred  ctermbg=none   cterm=none
-highlight DiffText         ctermfg=green    ctermbg=none   cterm=none
-" highlight Directory          
-highlight EndOfBuffer      ctermfg=gray     ctermbg=none   cterm=none
-highlight Error            ctermfg=darkred  ctermbg=none   cterm=none
-highlight ErrorMsg         ctermfg=darkred  ctermbg=none   cterm=none
-" highlight FoldColumn         
-highlight Folded           ctermfg=black     ctermbg=none  cterm=none
-highlight Identifier       ctermfg=black    ctermbg=none   cterm=none
-highlight Ignore           ctermfg=gray     ctermbg=none   cterm=none
-highlight IncSearch        ctermfg=black    ctermbg=yellow cterm=none
-highlight LineNr           ctermfg=gray     ctermbg=none  cterm=none
-" highlight LineNrAbove        
-" highlight LineNrBelow        
-highlight MatchParen       ctermfg=black    ctermbg=yellow cterm=none
-" highlight ModeMsg            
-" highlight MoreMsg            
-highlight NonText          ctermfg=gray     ctermbg=none   cterm=none
-" highlight Normal             
-highlight Pmenu            ctermfg=gray    ctermbg=white  cterm=none
-highlight PmenuSbar        ctermfg=none     ctermbg=white  cterm=none
-highlight PmenuSel         ctermfg=black    ctermbg=yellow cterm=none
-highlight PmenuThumb       ctermfg=black    ctermbg=white  cterm=none
-highlight PreProc          ctermfg=black    ctermbg=none   cterm=none
-" highlight Question           
-" highlight QuickFixLine       
-highlight Search           ctermfg=black    ctermbg=yellow cterm=none
-" highlight SignColumn         
-highlight Special          ctermfg=green    ctermbg=none   cterm=none
-highlight SpecialKey       ctermfg=gray     ctermbg=none   cterm=none
-highlight SpellBad         ctermfg=darkred  ctermbg=none   cterm=none
-highlight SpellCap         ctermfg=darkred  ctermbg=none   cterm=none
-highlight SpellLocal         ctermfg=darkred  ctermbg=none   cterm=none
-highlight SpellRare         ctermfg=darkred  ctermbg=none   cterm=none
-highlight Statement        ctermfg=black    ctermbg=none   cterm=none
-highlight StatusLine       ctermfg=gray     ctermbg=white  cterm=none
-highlight StatusLineNC     ctermfg=white    ctermbg=white  cterm=none
-highlight StatusLineTerm   ctermfg=gray     ctermbg=white  cterm=none
-highlight StatusLineTermNC ctermfg=white    ctermbg=white  cterm=none
-highlight TabLine          ctermfg=gray    ctermbg=white  cterm=none          
-highlight TabLineFill      ctermfg=black    ctermbg=white  cterm=none          
-highlight TabLineSel       ctermfg=black    ctermbg=none  cterm=none          
-" highlight Terminal           
-highlight Title            ctermfg=black    ctermbg=none   cterm=bold
-highlight Type             ctermfg=black    ctermbg=none   cterm=none
-highlight Underlined       ctermfg=black    ctermbg=none   cterm=underline
-highlight VertSplit        ctermfg=white    ctermbg=white  cterm=none
-highlight Visual           ctermfg=black    ctermbg=yellow cterm=none
-highlight VisualNOS        ctermfg=black    ctermbg=yellow cterm=none
-highlight WarningMsg       ctermfg=darkred  ctermbg=none   cterm=none
-highlight WildMenu         ctermfg=black    ctermbg=yellow cterm=none
-highlight htmlItalic       ctermfg=black    ctermbg=yellow cterm=none
-" highlight lCursor            
+" NR-16   NR-8   COLOR NAME
+" 0       0      Black
+" 8       0*     DarkGray, DarkGrey
+" 1       4      DarkBlue
+" 9       4*     Blue, LightBlue
+" 2       2      DarkGreen
+" 10      2*     Green, LightGreen
+" 3       6      DarkCyan
+" 11      6*     Cyan, LightCyan
+" 4       1      DarkRed
+" 12      1*     Red, LightRed
+" 5       5      DarkMagenta
+" 13      5*     Magenta, LightMagenta
+" 14      3*     Yellow, LightYellow
+" 6       3      Brown, DarkYellow
+" 7       7      LightGray, LightGrey, Gray, Grey
+" 15      7*     White
+
+highlight comment          ctermfg=darkgray  ctermbg=none   cterm=none
+highlight constant         ctermfg=brown     ctermbg=none   cterm=none
+highlight identifier       ctermfg=black     ctermbg=none   cterm=none
+highlight statement        ctermfg=black     ctermbg=none   cterm=none
+highlight preproc          ctermfg=black     ctermbg=none   cterm=none
+highlight type             ctermfg=black     ctermbg=none   cterm=none
+highlight special          ctermfg=black     ctermbg=none   cterm=none
+highlight underlined       ctermfg=black     ctermbg=none   cterm=underline
+highlight ignore           ctermfg=black     ctermbg=none   cterm=none
+highlight error            ctermfg=red       ctermbg=none   cterm=none
+highlight todo             ctermfg=black     ctermbg=yellow cterm=none
+
+" highlight colorcolumn
+" highlight conceal        
+" highlight cursorcolumn       
+" highlight cursorline         
+" highlight cursorlinenr       
+highlight diffadd          ctermfg=darkgreen ctermbg=none   cterm=none
+highlight diffchange       ctermfg=black     ctermbg=none   cterm=none
+highlight diffdelete       ctermfg=red       ctermbg=none   cterm=none
+highlight difftext         ctermfg=darkgreen ctermbg=none   cterm=none
+" highlight directory          
+highlight endofbuffer      ctermfg=darkgray  ctermbg=none   cterm=none
+highlight errormsg         ctermfg=red       ctermbg=none   cterm=none
+" highlight foldcolumn         
+highlight folded           ctermfg=darkgray  ctermbg=none   cterm=none
+highlight incsearch        ctermfg=black     ctermbg=yellow cterm=none
+" highlight linenr         
+" highlight linenrabove        
+" highlight linenrbelow        
+" highlight modemsg            
+" highlight moremsg            
+highlight nontext          ctermfg=darkgray  ctermbg=none   cterm=none  
+highlight pmenu            ctermfg=black     ctermbg=white  cterm=none
+highlight pmenusbar        ctermfg=none      ctermbg=white  cterm=none
+highlight pmenusel         ctermfg=black     ctermbg=yellow cterm=none
+highlight pmenuthumb       ctermfg=black     ctermbg=white  cterm=none
+" highlight question           
+" highlight quickfixline       
+highlight search           ctermfg=black     ctermbg=yellow cterm=none
+" highlight signcolumn         
+highlight specialkey       ctermfg=darkgray  ctermbg=none   cterm=none
+highlight spellbad         ctermfg=red       ctermbg=none   cterm=none
+highlight spellcap         ctermfg=red       ctermbg=none   cterm=none
+highlight spelllocal       ctermfg=red       ctermbg=none   cterm=none
+highlight spellrare        ctermfg=red       ctermbg=none   cterm=none
+highlight statusline       ctermfg=darkgray  ctermbg=white  cterm=none
+highlight statuslinenc     ctermfg=white     ctermbg=white  cterm=none
+highlight statuslineterm   ctermfg=darkgray  ctermbg=white  cterm=none
+highlight statuslinetermnc ctermfg=white     ctermbg=white  cterm=none
+highlight tabline          ctermfg=darkgray  ctermbg=white  cterm=none
+highlight tablinefill      ctermfg=black     ctermbg=white  cterm=none
+highlight tablinesel       ctermfg=black     ctermbg=none   cterm=none
+" highlight title            
+" highlight vertsplit        
+highlight visual           ctermfg=black     ctermbg=yellow cterm=none
+highlight visualnos        ctermfg=black     ctermbg=yellow cterm=none
+" highlight warningmsg      
+highlight wildmenu         ctermfg=black     ctermbg=yellow cterm=none
+
+highlight htmlItalic       ctermfg=black     ctermbg=yellow cterm=none
+highlight matchparen       ctermfg=black     ctermbg=yellow cterm=none
 "}}}
