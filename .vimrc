@@ -56,6 +56,9 @@ set wildmenu		" display completion matches in a status line
 " functions{{{
 function! HandleLink()"{{{
     " open file with appropriate app
+    " <cfile> does not work if path contains whitespace
+    " Use register instead
+    " let link = fnameescape(expand('<cfile>'))
     let link = @l
     let ext = fnamemodify(link, ':e')
     if isdirectory(link)
@@ -97,7 +100,7 @@ nnoremap <c-k> :bNext<cr>
 nnoremap <c-h> :bdelete<cr>
 nnoremap <c-p> :ls<cr>:b 
 nnoremap <leader>ff :call FzyCommand("rg . ~/foo.txt", ":r!echo")<cr>
-nnoremap <cr> ^f("lyi):call HandleLink()<cr>
+nnoremap <cr> ^f(lv$2h"ly:call HandleLink()<cr>
 inoremap jk <esc>l
 nnoremap <leader>hi
         \ :echo synIDattr(synIDtrans(synID(line("."),col("."),1)),"name")<CR>
@@ -213,7 +216,7 @@ let g:vim_markdown_anchorexpr = 'substitute(v:anchor, "-", " ", "g")'
 " 15      7*     White
 
 highlight comment          ctermfg=darkgray  ctermbg=none   cterm=none
-highlight constant         ctermfg=brown     ctermbg=none   cterm=none
+highlight constant         ctermfg=darkcyan  ctermbg=none   cterm=none
 highlight identifier       ctermfg=black     ctermbg=none   cterm=none
 highlight statement        ctermfg=black     ctermbg=none   cterm=none
 highlight preproc          ctermfg=black     ctermbg=none   cterm=none
@@ -232,7 +235,7 @@ highlight todo             ctermfg=black     ctermbg=yellow cterm=none
 highlight diffadd          ctermfg=darkgreen ctermbg=none   cterm=none
 highlight diffchange       ctermfg=black     ctermbg=none   cterm=none
 highlight diffdelete       ctermfg=red       ctermbg=none   cterm=none
-highlight difftext         ctermfg=darkgreen ctermbg=none   cterm=none
+highlight difftext         ctermfg=darkcyan  ctermbg=none   cterm=none
 " highlight directory          
 highlight endofbuffer      ctermfg=darkgray  ctermbg=none   cterm=none
 highlight errormsg         ctermfg=red       ctermbg=none   cterm=none
@@ -265,7 +268,7 @@ highlight statuslinetermnc ctermfg=white     ctermbg=white  cterm=none
 highlight tabline          ctermfg=darkgray  ctermbg=white  cterm=none
 highlight tablinefill      ctermfg=black     ctermbg=white  cterm=none
 highlight tablinesel       ctermfg=black     ctermbg=none   cterm=none
-" highlight title            
+highlight title            ctermfg=black     ctermbg=none   cterm=none
 " highlight vertsplit        
 highlight visual           ctermfg=black     ctermbg=yellow cterm=none
 highlight visualnos        ctermfg=black     ctermbg=yellow cterm=none

@@ -12,8 +12,9 @@ SAVEHIST=10000
 up="$(cygpath $USERPROFILE)"
 
 # PS1
-PS1=$'\n\$(x=\$?; (( \$x )) && printf "\1\e[1;31m\$x \1\e[0m")'\
-$'\1\e[1;30m\${PWD/$HOME/\\~}>\1\e[0m '
+PS1=$'\$(x=\$?; (( \$x )) && printf "\1\e[1;31m\$x\n\1\e[0m")
+\1\e[1;30m\$PWD\1\e[0m
+\1\e[1;30m>\1\e[0m '
 
 # aliases
 alias bgg='do-in-background '
@@ -27,7 +28,7 @@ alias dott='add-commit-push-dot'
 alias gitt='add-commit-push'
 alias kb='show-key-bindings'
 alias krc='vim ~/.mkshrc; . ~/.mkshrc'
-alias ls='ls -1'
+alias ls='ls -1 --color'
 alias la='ls -AlhF --color'
 alias laa='ls -AlhFd --color .*'
 alias ll='ls -lhF --color'
