@@ -9,8 +9,9 @@ HISTSIZE=10000
 SAVEHIST=10000
 
 # PS1
-export PS1='\
-    \n\e[01;31m$(x=$?; (( $x )) && print "$x ")\e[00m\e[01;30m\w\$\e[00m '
+export PS1='\e[01;31m$(x=$?; (( $x )) && printf "error $x\\\\n")\e[00m
+\e[01;30m$PWD\e[00m
+\e[01;30m\$ \e[00m'
 
 # aliases
 alias bak='backup-file'

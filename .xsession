@@ -25,8 +25,13 @@ numlockx
 unclutter -root -noevents &
 xmodmap .xmodmaprc
 
+# should be in /etc/sysctl.conf
+doas sysctl machdep.lidaction=0
+
+# doas ntfs-3g /dev/sd2i /mnt/shared
+
 # status bar
 # status-print | status-draw &
-# status-watch &
+# status-print | lemonbar-xft -p -n status -f "Terminus:size=16" &
 
 cwm
