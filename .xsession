@@ -26,7 +26,7 @@ unclutter -root -noevents &
 xmodmap .xmodmaprc
 
 # status bar
-status-print | status-draw &
-status-watch &
+# status-print | status-draw &
+# status-watch &
 
 cwm
