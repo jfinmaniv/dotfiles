@@ -14,6 +14,8 @@ export PS1='\e[01;31m$(x=$?; (( $x )) && printf "error $x\\\\n")\e[00m
 \e[01;30m\$ \e[00m'
 
 # aliases
+alias lsb='doas sysctl hw.disknames'
+alias lsbb='doas disklabel -h'
 alias bak='backup-file'
 alias crc='vim ~/.cwmrc; pkill -HUP cwm'
 alias dot='git --git-dir=$HOME/.dot.git/ --work-tree=$HOME'
