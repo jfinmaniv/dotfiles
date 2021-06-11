@@ -54,39 +54,42 @@ set wildmenu		" display completion matches in a status line
 
 "}}}
 " functions{{{
-function! HandleLink()"{{{
-    " open file with appropriate app
-    " <cfile> does not work if path contains whitespace
-    " Use register instead
-    " let link = fnameescape(expand('<cfile>'))
-    let link = @l
+function! OpenFile()"{{{
+    " open file
+    
+    " convert link to absolute path:
+    let link = fnamemodify(@l, ':p')
     let ext = fnamemodify(link, ':e')
+
     if isdirectory(link)
-        call system('tmux split-window -c "' . link . '" $SHELL')
-    elseif ext[0:2] == 'txt'
-        " ge is part of platsicboy/vim-markdown plugin
-        normal ge
+        call system("tmux split-window -c '" . link . "'")
+    elseif ext[0:2] == 'txt' || ext[0:1] == 'md' || ext[0:2] == 'csv'
+        if ext[2] == '#'
+            let hash_anchor = matchstr(link, "#.*")
+            let file = substitute(link, hash_anchor, "", "")
+            execute "edit " . file
+            let anchor_dashes = hash_anchor[1:]
+            let anchor = substitute(anchor_dashes, "-", " ", "g")
+            " \c makes search case insensitive, \\c escapes backslash
+            execute ":silent! /\\c" . anchor
+        else
+            execute "edit " . link
+        endif
     elseif link[0:3] == 'http'
-        normal gx
+        call system("firefox '" . link . "' &")
     elseif ext == 'pdf'
-        call system('sumatra-pdf ' . fnameescape(link) . ' &')
+        call system("sumatra-pdf '" . link . "' &")
     else 
-        call system('start "" ' . fnameescape(link) . ' &')
+        call system("start '' '" . link . "' &")
     endif
-    " replace contents of unnamed register for pasting after following link
-    let @"=@1
 endfunction
 "}}}
-function! FzyCommand(choice_command, vim_command)"{{{
-  try
-    let output = system(a:choice_command . " | fzy ")
-  catch /Vim:Interrupt/
-    " Swallow errors from ^C, allow redraw! below
-  endtry
-  redraw!
-  if v:shell_error == 0 && !empty(output)
-    exec a:vim_command . ' ' . output
-  endif
+function! OpenDir()"{{{
+    " open dir
+    
+    let dir = fnamemodify(@d, ':p:h')
+    call system("tmux split-window -c '" . dir . "'")
+
 endfunction
 "}}}
 "}}}
@@ -99,8 +102,8 @@ nnoremap <c-j> :bnext<cr>
 nnoremap <c-k> :bNext<cr>
 nnoremap <c-h> :bdelete<cr>
 nnoremap <c-p> :ls<cr>:b 
-nnoremap <leader>ff :call FzyCommand("rg . ~/foo.txt", ":r!echo")<cr>
-nnoremap <cr> ^f(lv$2h"ly:call HandleLink()<cr>
+nnoremap <cr> f("lyi):call OpenFile()<cr>
+nnoremap <leader><cr> f("dyi):call OpenDir()<cr>
 inoremap jk <esc>l
 nnoremap <leader>hi
         \ :echo synIDattr(synIDtrans(synID(line("."),col("."),1)),"name")<CR>
@@ -112,7 +115,6 @@ nnoremap <leader>vo :w<cr><c-^>:bdelete .vimrc<cr>:source $MYVIMRC<cr>
 " noremap <silent> Y 
 "         \ "cy :redir! > /dev/clipboard \| silent echon @c \| redir END<cr>
 noremap Y "*y
-nnoremap <silent> <leader>gd yi)"d:!start "" "$(dirname '<c-r>d')"<cr>
 " uses expression register:
 nnoremap <silent> <leader>wtu
         \ "pyi)vi)c<c-r>=system('cygpath -u "<c-r>p" \| tr -d "\n"')<cr><esc>
@@ -171,8 +173,26 @@ augroup markdown " {
     autocmd FileType markdown set tabstop=2 
     autocmd FileType markdown set shiftwidth=2
     autocmd FileType markdown set nowrap
-    autocmd FileType markdown set concealcursor=nc
+    " autocmd FileType markdown set concealcursor=nc
     autocmd FileType markdown set conceallevel=2
+    " may eventually move to .vim/after/syntax/markdown.vim >>>>>>>
+    autocmd FileType markdown syn region markdownLinkText 
+                \ matchgroup=markdownLinkTextDelimiter
+                \ start="!\=\[\%(\_[^]]*]\%( \=[[(]\)\)\@=" 
+                \ end="\]\%( \=[[(]\)\@="
+                \ nextgroup=markdownLink,markdownId 
+                \ skipwhite
+                \ contains=@markdownInline,markdownLineStart
+                \ concealends
+    autocmd FileType markdown syn region markdownLink 
+                \ matchgroup=markdownLinkDelimiter 
+                \ start="(" 
+                \ end=")" 
+                \ contains=markdownUrl 
+                \ keepend 
+                \ contained
+                \ conceal
+    " <<<<<<<
 augroup END " }
 "}}}
 "}}}
