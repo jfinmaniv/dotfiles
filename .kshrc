@@ -13,6 +13,9 @@ export PS1='\e[01;31m$(x=$?; (( $x )) && printf "error $x\\\\n")\e[00m
 \e[01;30m$PWD\e[00m
 \e[01;30m\$ \e[00m'
 
+# set memory to something high
+ulimit -d $(( 8 * 1024 * 1024 )) # 8 Gb, max is 32, installed is 16
+
 # aliases
 alias lsb='doas sysctl hw.disknames'
 alias lsbb='doas disklabel -h'
@@ -31,7 +34,6 @@ alias lA='ls -AlhFd .*'
 alias la='ls -AlhF'
 alias ll='ls -lhF'
 alias lynx="lynx -cfg=$HOME/lynx/lynx.cfg -lss=$HOME/lynx/lynx.lss"
-alias mnas='doas sshfs root@192.168.1.1:/mnt /mnt/nas -o allow_other'
 alias mvv='batch-rename'
 alias pdf='sumatra-pdf'
 alias pdff='markdown-to-pdf'
@@ -45,4 +47,6 @@ alias tp='move-to-trash'
 alias trc='vim ~/.tmux.conf; tmux source-file ~/.tmux.conf'
 alias ubak='restore-file'
 alias unas='doas umount /mnt/nas'
+alias mnas='doas mount -t nfs -o noatime,sync rp:/mnt /mnt/nas/'
+alias vpn='start-vpn'
 

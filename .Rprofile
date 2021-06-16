@@ -1,4 +1,4 @@
-options(help_type="html", browser = "/usr/bin/firefox")
+options(help_type="html", browser = "/usr/local/bin/firefox")
 
 local({ 
   # sets repository
