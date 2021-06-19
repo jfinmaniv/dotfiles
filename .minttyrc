@@ -41,4 +41,4 @@ Locale=en_US
 Charset=UTF-8
 BoldAsFont=no
 BoldAsColour=no
-CursorBlinks=no
+CursorBlinks=yes

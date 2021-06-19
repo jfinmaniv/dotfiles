@@ -25,9 +25,9 @@ TERM=xterm-256color
 up="$(cygpath $USERPROFILE)"
 
 # PS1
-PS1=$'\$(x=\$?; (( \$x )) && printf "\1\e[1;31merror \$x\n\1\e[0m")
+PS1=$'\$(x=\$?; (( \$x )) && printf "\1\e[1;31m:( \$x\n\1\e[0m")
 \1\e[1;30m\$PWD/\1\e[0m
-\1\e[1;30m>\1\e[0m '
+\1\e[1;30m$\1\e[0m '
 
 # aliases
 alias bgg='do-in-background '
@@ -56,6 +56,7 @@ alias shutdown='cmd //c "shutdown /s /t 0"'
 alias tp='move-to-trash'
 alias trc='vim ~/.tmux.conf; tmux source-file ~/.tmux.conf'
 alias ubak='restore-file'
+alias rain='make-rain'
 
 # start tmux
 if [ -z "$TMUX" ]

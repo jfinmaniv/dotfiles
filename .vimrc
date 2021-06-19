@@ -70,8 +70,7 @@ function! OpenFile()"{{{
             execute "edit " . file
             let anchor_dashes = hash_anchor[1:]
             let anchor = substitute(anchor_dashes, "-", " ", "g")
-            " \c makes search case insensitive, \\c escapes backslash
-            execute ":silent! /\\c" . anchor
+            execute "silent! /\\c" . anchor
         else
             execute "edit " . link
         endif
@@ -89,7 +88,6 @@ function! OpenDir()"{{{
     
     let dir = fnamemodify(@d, ':p:h')
     call system("tmux split-window -c '" . dir . "'")
-
 endfunction
 "}}}
 "}}}
@@ -102,8 +100,8 @@ nnoremap <c-j> :bnext<cr>
 nnoremap <c-k> :bNext<cr>
 nnoremap <c-h> :bdelete<cr>
 nnoremap <c-p> :ls<cr>:b 
-nnoremap <cr> f("lyi):call OpenFile()<cr>
-nnoremap <leader><cr> f("dyi):call OpenDir()<cr>
+nnoremap <cr> 0f]f("lyi):call OpenFile()<cr>
+nnoremap <leader><cr> 0f]f("dyi):call OpenDir()<cr>
 inoremap jk <esc>l
 nnoremap <leader>hi
         \ :echo synIDattr(synIDtrans(synID(line("."),col("."),1)),"name")<CR>
@@ -268,10 +266,10 @@ highlight incsearch        ctermfg=black     ctermbg=yellow cterm=none
 " highlight modemsg            
 " highlight moremsg            
 highlight nontext          ctermfg=darkgray  ctermbg=none   cterm=none  
-highlight pmenu            ctermfg=black     ctermbg=white  cterm=none
-highlight pmenusbar        ctermfg=none      ctermbg=white  cterm=none
+highlight pmenu            ctermfg=black     ctermbg=gray  cterm=none
+highlight pmenusbar        ctermfg=none      ctermbg=gray  cterm=none
 highlight pmenusel         ctermfg=black     ctermbg=yellow cterm=none
-highlight pmenuthumb       ctermfg=black     ctermbg=white  cterm=none
+highlight pmenuthumb       ctermfg=none      ctermbg=darkgray  cterm=none
 " highlight question           
 " highlight quickfixline       
 highlight search           ctermfg=black     ctermbg=yellow cterm=none
