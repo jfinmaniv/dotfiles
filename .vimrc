@@ -100,8 +100,8 @@ nnoremap <c-j> :bnext<cr>
 nnoremap <c-k> :bNext<cr>
 nnoremap <c-h> :bdelete<cr>
 nnoremap <c-p> :ls<cr>:b 
-nnoremap <cr> 0f]f("lyi):call OpenFile()<cr>
-nnoremap <leader><cr> 0f]f("dyi):call OpenDir()<cr>
+nnoremap <cr> ml0f]f("lyi)`l:call OpenFile()<cr>
+nnoremap <leader><cr> md0f]f("dyi)`d:call OpenDir()<cr>
 inoremap jk <esc>l
 nnoremap <leader>hi
         \ :echo synIDattr(synIDtrans(synID(line("."),col("."),1)),"name")<CR>
