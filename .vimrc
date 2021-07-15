@@ -70,16 +70,19 @@ function! OpenFile()"{{{
             execute "edit " . file
             let anchor_dashes = hash_anchor[1:]
             let anchor = substitute(anchor_dashes, "-", " ", "g")
-            execute "silent! /\\c" . anchor
+            execute "silent! /# " . anchor
         else
-            execute "edit " . link
+            " execute "edit " . link
+            call system("tmux split-window vim " . link)
         endif
+    elseif ext[0:2] == 'htm'
+        call system("firefox file:///C:/Users/jinman/msys'" . link . "' &")
     elseif link[0:3] == 'http'
         call system("firefox '" . link . "' &")
     elseif ext == 'pdf'
-        call system("sumatra-pdf '" . link . "' &")
+        call system("sumatraPDF '" . link . "' &")
     else 
-        call system("start '' '" . link . "' &")
+        call system("cygstart '" . link . "' &")
     endif
 endfunction
 "}}}
@@ -206,11 +209,6 @@ let g:UltiSnipsJumpForwardTrigger="<tab>"
 let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 let g:UltiSnipsSnippetDirectories=[ "my-snippets", "Ultisnips" ]
 "}}}
-" vim markdown{{{
-let g:vim_markdown_follow_anchor = 1
-let g:vim_markdown_new_list_item_indent = 0
-let g:vim_markdown_folding_disabled = 1
-let g:vim_markdown_anchorexpr = 'substitute(v:anchor, "-", " ", "g")'
 
 "}}}
 "}}}

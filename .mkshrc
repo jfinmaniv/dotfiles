@@ -9,20 +9,21 @@ HISTSIZE=10000
 SAVEHIST=10000
 
 # path
+ffmpeg="/c/Users/$USER/ffmpeg/bin"
+firefox="/c/Users/$USER/firefox"
+pandoc="/c/Users/$USER/pandoc"
 scripts="$HOME/scripts"
-tex="/opt/texlive/2021/bin/win32"
-firefox="/opt/firefox/"
-sumatra="/opt/sumatra-pdf"
-PATH=".:$scripts:$firefox:$sumatra:$tex:$PATH"
+sumatra_pdf="/c/Users/$USER/sumatra-pdf"
+texlive="/c/Users/$USER/texlive/2021/bin/win32"
+export PATH=".:$ffmpeg:$firefox:$pandoc:$scripts:$sumatra_pdf:$texlive:$PATH"
 
 # other variables
-BROWSER='/opt/firefox/firefox.exe'
-CHERE_INVOKING=1 
-EDITOR=/usr/bin/vim
-TERM=xterm-256color
-
-# windows user directory
-up="$(cygpath $USERPROFILE)"
+export BROWSER='/opt/firefox/firefox.exe'
+export CHERE_INVOKING=1 
+export EDITOR=/usr/bin/vim
+export TERM=xterm-256color
+export dl="/c/Users/$USER/Downloads"
+export up="/c/Users/$USER"
 
 # PS1
 PS1=$'\$(x=\$?; (( \$x )) && printf "\1\e[1;31m:( \$x\n\1\e[0m")
@@ -33,7 +34,7 @@ PS1=$'\$(x=\$?; (( \$x )) && printf "\1\e[1;31m:( \$x\n\1\e[0m")
 alias bgg='do-in-background '
 alias R='r-wrapper'
 alias bak='backup-file'
-alias cdd="cd $up/Downloads"
+alias cdd="source $HOME/scripts/go-to-drive"
 alias cdl="source $HOME/scripts/go-to-local"
 alias cdr="source $HOME/scripts/go-to-remote"
 alias dot='git --git-dir=$HOME/.dot.git/ --work-tree=$HOME'
@@ -47,7 +48,7 @@ alias laa='ls -AlhFd .*'
 alias ll='ls -lhF'
 alias mvv='batch-rename'
 alias sshr='ssh root@192.168.1.1'
-alias pdf='sumatra-pdf'
+alias pdf='sumatrapdf'
 alias pdff='markdown-to-pdf'
 alias play='ffplay'
 alias ranger='source /usr/bin/ranger'
@@ -57,6 +58,7 @@ alias tp='move-to-trash'
 alias trc='vim ~/.tmux.conf; tmux source-file ~/.tmux.conf'
 alias ubak='restore-file'
 alias focus='play-sounds'
+alias start='start-wrapper'
 
 # start tmux
 if [ -z "$TMUX" ]
