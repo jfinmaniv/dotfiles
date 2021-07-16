@@ -3,19 +3,32 @@ set -o emacs
 bind ^l=clear-screen
 bind -m ^xd="$(date +'%Y-%m-%d')"
 
+cdd () {
+    cd "$(find . -type d | fzy)"
+}
+vimm () {
+    vim "$(find . -type f | fzy)"
+}
+cdr () {
+    local="/home/jfin/rdrive"
+    remote="/r/rb3/shared"
+    cd "${PWD//$local/$remote}"
+}
+
 # history
 HISTFILE=~/.histfile
 HISTSIZE=10000
 SAVEHIST=10000
 
 # path
+fd="/c/Users/$USER/fd"
 ffmpeg="/c/Users/$USER/ffmpeg/bin"
 firefox="/c/Users/$USER/firefox"
 pandoc="/c/Users/$USER/pandoc"
 scripts="$HOME/scripts"
 sumatra_pdf="/c/Users/$USER/sumatra-pdf"
 texlive="/c/Users/$USER/texlive/2021/bin/win32"
-export PATH=".:$ffmpeg:$firefox:$pandoc:$scripts:$sumatra_pdf:$texlive:$PATH"
+export PATH=".:$fd:$ffmpeg:$firefox:$pandoc:$scripts:$sumatra_pdf:$texlive:$PATH"
 
 # other variables
 export BROWSER='/opt/firefox/firefox.exe'
@@ -34,9 +47,6 @@ PS1=$'\$(x=\$?; (( \$x )) && printf "\1\e[1;31m:( \$x\n\1\e[0m")
 alias bgg='do-in-background '
 alias R='r-wrapper'
 alias bak='backup-file'
-alias cdd="source $HOME/scripts/go-to-drive"
-alias cdl="source $HOME/scripts/go-to-local"
-alias cdr="source $HOME/scripts/go-to-remote"
 alias dot='git --git-dir=$HOME/.dot.git/ --work-tree=$HOME'
 alias dott='add-commit-push-dot'
 alias gitt='add-commit-push'
@@ -58,7 +68,7 @@ alias tp='move-to-trash'
 alias trc='vim ~/.tmux.conf; tmux source-file ~/.tmux.conf'
 alias ubak='restore-file'
 alias focus='play-sounds'
-alias start='start-wrapper'
+alias st='cygstart'
 
 # start tmux
 if [ -z "$TMUX" ]
